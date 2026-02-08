@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+dotenv
+sqlalchemy
+
+# DEV DEPENDENCIES
+pytest 
+pytest-asyncio 
+httpx
+dotenv
