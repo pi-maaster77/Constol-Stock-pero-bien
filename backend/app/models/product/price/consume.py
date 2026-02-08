@@ -2,7 +2,7 @@ from sqlalchemy import select
 from typing import TYPE_CHECKING
 
 
-from backend.app.models.product.batch.batch import Batch
+from app.models.product.batch.batch import Batch
 
 from .dispatcher import calc_product_price
 

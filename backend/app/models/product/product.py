@@ -16,7 +16,7 @@ from app.database import Base
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from backend.app.models.product.batch.batch import Batch
+    from app.models.product.batch.batch import Batch
     from app.models.product.move.moveDetail import MoveDetail
 
 
