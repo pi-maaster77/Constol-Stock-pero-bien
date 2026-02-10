@@ -1,3 +1,5 @@
+<!-- frontend/src/App.vue -->
+
 <script setup lang="ts">
 
 import 'bootstrap-icons/font/bootstrap-icons.min.css'

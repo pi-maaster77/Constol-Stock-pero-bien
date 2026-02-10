@@ -1,3 +1,5 @@
+# backend/app/models/product/move/moveDetail.py
+
 from app.database import Base, fk
 from app.models.product.product import Product
 from sqlalchemy.orm import Mapped, mapped_column, relationship

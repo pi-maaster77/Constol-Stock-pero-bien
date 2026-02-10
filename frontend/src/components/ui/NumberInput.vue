@@ -1,3 +1,5 @@
+<!-- frontend/src/components/ui/NumberInput.vue -->
+
 <template>
   <input
     type="number"

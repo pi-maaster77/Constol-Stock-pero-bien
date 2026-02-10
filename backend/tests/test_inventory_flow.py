@@ -1,35 +1,25 @@
-from datetime import date
+# backend/tests/test_inventory_flow.py
 
+from datetime import date
+import pytest
 from sqlalchemy.orm import Session
 
-from app import Product, PriceFormula, Batch, Move, MoveDetail , consume_fifo
+from app import Product, PriceFormula, Batch, Move, MoveDetail
+from app.models.product.price.dispatcher import calc_product_price
 
+def setup_inventory(session: Session, formula: PriceFormula):
 
-def test_full_inventory_flow(session: Session):
-
-    # 1️⃣ crear producto
     product = Product(
-        name="Arroz",
-        bc="123",
-        price_formula=PriceFormula.FIFO
+        name=f"Arroz {formula.value}",
+        bc=f"123-{formula.value}",
+        price_formula=formula,
+        public_price=200.0
     )
 
     session.add(product)
     session.flush()
 
-    # 2️⃣ primera compra (10 unidades a 100)
-
-    move_in_1 = Move()
-    session.add(move_in_1)
-    session.flush()
-
-    session.add(
-        MoveDetail(
-            id_move=move_in_1.id,
-            id_product=product.id,
-            ammount=10
-        )
-    )
+    # compra 1: 10 @100
 
     batch1 = Batch(
         id_product=product.id,
@@ -38,16 +28,7 @@ def test_full_inventory_flow(session: Session):
         date=date(2026, 3, 1)
     )
 
-    session.add(batch1)
-
-    # 3️⃣ vender 6
-
-    cost1 = consume_fifo(session, product.id, 6)
-
-    assert cost1 == 600
-    assert batch1.ammount == 4
-
-    # 4️⃣ segunda compra (10 unidades a 150)
+    # compra 2: 10 @150
 
     batch2 = Batch(
         id_product=product.id,
@@ -56,28 +37,23 @@ def test_full_inventory_flow(session: Session):
         date=date(2026, 4, 1)
     )
 
-    session.add(batch2)
+    session.add_all([batch1, batch2])
+    session.flush()
 
-    # 5️⃣ vender 6 más (FIFO: 4 a 100 + 2 a 150)
+    return product, batch1, batch2
 
-    cost2 = consume_fifo(session, product.id, 6)
+@pytest.mark.parametrize(
+    "formula,expected_price",
+    [
+        (PriceFormula.FIFO, 100),
+        (PriceFormula.LIFO, 150),
+        (PriceFormula.WAVG, 125),
+    ]
+)
+def test_price_formulas(session, formula, expected_price):
 
-    assert cost2 == 4 * 100 + 2 * 150
+    product, batch1, batch2 = setup_inventory(session, formula)
 
-    # batch1 vacío
-    assert batch1.ammount == 0
+    price = calc_product_price(session, product)
 
-    # batch2 quedan 8
-    assert batch2.ammount == 8
-
-    # 6️⃣ caducan 3 unidades del batch2
-
-    batch2.ammount -= 3
-
-    # 7️⃣ stock final esperado
-
-    total_stock = batch1.ammount + batch2.ammount
-
-    assert total_stock == 5
-
-    session.rollback()
+    assert price == expected_price

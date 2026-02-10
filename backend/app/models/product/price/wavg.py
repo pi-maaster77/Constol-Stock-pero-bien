@@ -1,3 +1,5 @@
+# backend/app/models/product/price/wavg.py
+
 from sqlalchemy import select, func
 from ..batch.batch import Batch
 

@@ -1,3 +1,5 @@
+// frontend/vite.config.ts
+
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'

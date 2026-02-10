@@ -1,3 +1,5 @@
+# backend/app/models/product/price/fifo.py
+
 from sqlalchemy import select
 from ..batch.batch import Batch
 

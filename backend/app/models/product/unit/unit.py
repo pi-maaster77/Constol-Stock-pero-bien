@@ -1,5 +1,4 @@
-# backend/app/models/product/move/move.py
-
+# backend/app/models/product/unit/unit.py
 
 from typing import List, Optional
 from sqlalchemy.orm import Mapped
@@ -13,14 +12,14 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from app.models.product.move.moveDetail import MoveDetail
+    from app.models.product.product import Product
 
-class Move(Base):
-    __tablename__ = "move"
+class Unit(Base):
+    __tablename__ = "unit"
 
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    date: Mapped[Optional[date]]
+    name: Mapped[str]
+    abreviation: Mapped[str]
 
-
-    details: Mapped[List["MoveDetail"]] = relationship(back_populates="move")
+    products: Mapped[List["Product"]] = relationship(back_populates="unit")

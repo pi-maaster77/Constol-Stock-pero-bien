@@ -1,3 +1,5 @@
+# backend/app/__init__.py
+
 from .models.product.product import Product, PriceFormula
 from .models.product.batch.batch import Batch
 from .models.product.move.moveDetail import Move

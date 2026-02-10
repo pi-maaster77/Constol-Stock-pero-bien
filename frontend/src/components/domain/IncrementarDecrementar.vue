@@ -1,3 +1,5 @@
+<!-- frontend/src/components/domain/IncrementarDecrementar.vue -->
+
 <template>
     <NumberInputWithButtons 
         v-model="count" 

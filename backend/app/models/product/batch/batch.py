@@ -1,13 +1,13 @@
+# backend/app/models/product/batch/batch.py
+
 from sqlalchemy.orm import Mapped
 from datetime import date
 
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+
 from app.database import Base, fk
 from app.models.product.product import Product
-
-
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from app.database import Base
-
 
 
 class Batch(Base):

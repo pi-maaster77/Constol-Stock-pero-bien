@@ -1,3 +1,5 @@
+<!-- frontend/src/components/ui/NumberInputWithButtons.vue -->
+
 <template>
     <span class="input-group">
         <NumberInput
