@@ -10,6 +10,7 @@ from sqlalchemy import (
     String,
     Boolean,
     Float,
+    ForeignKey,
 )
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -38,9 +39,12 @@ class Product(Base):
     name: Mapped[str] = mapped_column(String)
 
     ammount: Mapped[int] = mapped_column(Integer, default=0)
-    expire: Mapped[bool] = mapped_column(Boolean, default=False)
+    expires: Mapped[bool] = mapped_column(Boolean, default=False)
 
     price_cache: Mapped[Optional[float]] = mapped_column(Float)
+
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+
 
     price_formula: Mapped[PriceFormula] = mapped_column(
         SAEnum(
@@ -60,7 +64,7 @@ class Product(Base):
         back_populates="product",
         order_by="DiscountBulk.min_qty.asc()"
     )
-    unit_id: Mapped[int] = mapped_column(Integer, nullable=False)
+    unit_id: Mapped[int] = mapped_column(Integer, ForeignKey("unit.id"), nullable=False, default=1)
     unit: Mapped["Unit"] = relationship(back_populates="products")
 
     

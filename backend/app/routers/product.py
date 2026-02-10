@@ -5,8 +5,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import engine
-from app import Product
-from app import schemas
+from app.models import Product
+from app.schemas.product import product as schemas
+
 
 router = APIRouter(
     prefix="/product",
@@ -20,7 +21,7 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/", response_model=schemas.Product)
+@router.post("/", response_model=schemas.ProductReturn)
 def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
     db_product = Product(**product.dict())
     db.add(db_product)
@@ -28,37 +29,48 @@ def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)
     db.refresh(db_product)
     return db_product
 
-@router.get("/", response_model=List[schemas.Product])
+@router.get("/", response_model=List[schemas.ProductReturn])
 def read_products(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     products = db.query(Product).offset(skip).limit(limit).all()
     return products
 
-@router.get("/{product_id}", response_model=schemas.Product)
+@router.get("/{product_id}", response_model=schemas.ProductReturn)
 def read_product(product_id: int, db: Session = Depends(get_db)):
     db_product = db.query(Product).filter(Product.id == product_id).first()
     if db_product is None:
         raise HTTPException(status_code=404, detail="Product not found")
     return db_product
 
-@router.put("/{product_id}", response_model=schemas.Product)
-def update_product(product_id: int, product: schemas.ProductUpdate, db: Session = Depends(get_db)):
+@router.patch("/{product_id}", response_model=schemas.ProductReturn)
+def patch_product(
+    product_id: int,
+    product_patch: schemas.ProductPatch,
+    db: Session = Depends(get_db)
+):
     db_product = db.query(Product).filter(Product.id == product_id).first()
-    if db_product is None:
+
+    if not db_product:
         raise HTTPException(status_code=404, detail="Product not found")
 
-    for var, value in vars(product).items():
-        setattr(db_product, var, value) if value else None
+    update_data = product_patch.dict(exclude_unset=True)
+
+    for field, value in update_data.items():
+        setattr(db_product, field, value)
 
     db.commit()
     db.refresh(db_product)
+
     return db_product
 
-@router.delete("/{product_id}", response_model=schemas.Product)
+@router.delete("/{product_id}", response_model=schemas.ProductReturn)
 def delete_product(product_id: int, db: Session = Depends(get_db)):
     db_product = db.query(Product).filter(Product.id == product_id).first()
     if db_product is None:
         raise HTTPException(status_code=404, detail="Product not found")
-
-    db.delete(db_product)
+    
+    db_product.active = False
+    
     db.commit()
+    db.refresh(db_product)
+
     return db_product

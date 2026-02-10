@@ -4,7 +4,7 @@ from datetime import date
 import pytest
 from sqlalchemy.orm import Session
 
-from app import Product, PriceFormula, Batch, Move, MoveDetail
+from app.models import Product, PriceFormula, Batch, Move, MoveDetail
 from app.models.product.price.dispatcher import calc_product_price
 
 def setup_inventory(session: Session, formula: PriceFormula):

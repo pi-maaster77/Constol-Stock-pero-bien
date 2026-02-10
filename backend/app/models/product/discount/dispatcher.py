@@ -2,7 +2,7 @@
 
 from sqlalchemy import select
 from .discountBulk import DiscountBulk
-from ..product import Product
+from app.models.product.product import Product
 
 
 def get_bulk_discount(session, product_id: int, qty: int) -> float:

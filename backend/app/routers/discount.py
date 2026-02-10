@@ -4,7 +4,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app import schemas
+from app.schemas.product import discount as schemas
 from app.database import engine
 from app.models.product.discount import discountBulk
 
