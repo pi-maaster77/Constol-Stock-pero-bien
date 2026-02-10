@@ -35,7 +35,7 @@ def setup_product_with_discounts(session: Session) -> Product:
 
 
 @pytest.mark.parametrize(
-    "qty, expected_total_price",
+    "ammount, expected_total_price",
     [
         (1, 100.0),  # Sin descuento: 1 * 100
         (4, 400.0),  # Sin descuento, justo por debajo del umbral: 4 * 100
@@ -46,7 +46,7 @@ def setup_product_with_discounts(session: Session) -> Product:
     ],
 )
 def test_calculate_discounted_price_with_rules(
-    session: Session, qty: int, expected_total_price: float
+    session: Session, ammount: int, expected_total_price: float
 ):
     """
     Verifica que el cálculo del precio con descuento funcione correctamente
@@ -57,7 +57,7 @@ def test_calculate_discounted_price_with_rules(
 
     # 2. Ejecución
     final_price = calculate_discounted_price(
-        session=session, product_id=product.id, qty=qty
+        session=session, product_id=product.id, ammount=ammount
     )
 
     # 3. Aserción
@@ -80,7 +80,7 @@ def test_calculate_price_for_product_without_discounts(session: Session):
 
     # 2. Ejecución
     final_price = calculate_discounted_price(
-        session=session, product_id=product.id, qty=10
+        session=session, product_id=product.id, ammount=10
     )
 
     # 3. Aserción

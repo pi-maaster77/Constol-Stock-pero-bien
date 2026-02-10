@@ -5,7 +5,7 @@ from .discountBulk import DiscountBulk
 from app.models.product.product import Product
 
 
-def get_bulk_discount(session, product_id: int, qty: int) -> float:
+def get_bulk_discount(session, product_id: int, ammount: int) -> float:
     """
     Devuelve porcentaje (0.0–1.0)
     """
@@ -17,13 +17,13 @@ def get_bulk_discount(session, product_id: int, qty: int) -> float:
     ).all()
 
     for rule in rules:
-        if qty >= rule.min_qty:
+        if ammount >= rule.min_qty:
             return rule.discount_pct
 
     return 0.0
 
 
-def calculate_discounted_price(session, product_id: int, qty: int) -> float:
+def calculate_discounted_price(session, product_id: int, ammount: int) -> float:
     """
     Calcula el precio final para una cantidad de un producto,
     aplicando descuentos por volumen.
@@ -37,10 +37,10 @@ def calculate_discounted_price(session, product_id: int, qty: int) -> float:
     base_price = product.public_price
 
     # 3. Obtener el porcentaje de descuento para la cantidad dada.
-    discount_pct = get_bulk_discount(session, product_id, qty)
+    discount_pct = get_bulk_discount(session, product_id, ammount)
 
     # 4. Calcular el precio total sin descuento.
-    total_price = base_price * qty
+    total_price = base_price * ammount
 
     # 5. Aplicar el descuento.
     final_price = total_price * (1 - discount_pct)

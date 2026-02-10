@@ -90,24 +90,24 @@ def products_out(products_out: schemas.MovesOut, db: Session = Depends(get_db)):
         if product.ammount < item.ammount:
             raise HTTPException(400, "Insufficient stock")
 
-        qty = item.ammount
+        ammount = item.ammount
         unit_price = product.public_price
 
         # ---------- descuento bulk ----------
         discount_percent = 0
 
         for d in product.bulk_discounts:
-            if qty >= d.min_qty:
+            if ammount >= d.min_qty:
                 discount_percent = d.discount
 
         discount_amount = unit_price * discount_percent
         final_price = unit_price - discount_amount
-        line_total = final_price * qty
+        line_total = final_price * ammount
 
         ticket_total += line_total
 
         # ---------- FIFO ----------
-        remaining = qty
+        remaining = ammount
 
         batches = (
             db.query(Batch)
@@ -128,14 +128,14 @@ def products_out(products_out: schemas.MovesOut, db: Session = Depends(get_db)):
         if remaining > 0:
             raise HTTPException(400, "Stock inconsistency")
 
-        product.ammount -= qty
+        product.ammount -= ammount
 
         # ---------- snapshot ----------
         detail = MoveDetail(
             move_id=move.id,
             product_id=product.id,
             product_name=product.name,
-            qty=qty,
+            ammount=ammount,
             unit_price_original=unit_price,
             discount_percent=discount_percent,
             discount_amount=discount_amount,

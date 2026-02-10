@@ -8,7 +8,7 @@ from app.models.product.batch.batch import Batch
 from .dispatcher import calc_product_price
 
 
-def consume_fifo(session, product_id: int, qty: int):
+def consume_fifo(session, product_id: int, ammount: int):
 
     batches = session.scalars(
         select(Batch)
@@ -16,7 +16,7 @@ def consume_fifo(session, product_id: int, qty: int):
         .order_by(Batch.date.asc())
     ).all()
 
-    remaining = qty
+    remaining = ammount
     total = 0
 
     for batch in batches:
@@ -36,7 +36,7 @@ def consume_fifo(session, product_id: int, qty: int):
 
     return total
 
-def consume_lifo(session, product_id: int, qty: int):
+def consume_lifo(session, product_id: int, ammount: int):
 
     batches = session.scalars(
         select(Batch)
@@ -44,7 +44,7 @@ def consume_lifo(session, product_id: int, qty: int):
         .order_by(Batch.date.desc())
     ).all()
 
-    remaining = qty
+    remaining = ammount
     total = 0
 
     for batch in batches:
@@ -63,7 +63,7 @@ def consume_lifo(session, product_id: int, qty: int):
 
     return total
 
-def consume_wavg(session, product_id: int, qty: int):
+def consume_wavg(session, product_id: int, ammount: int):
 
     # 1️⃣ calcular promedio ponderado
 
@@ -80,11 +80,11 @@ def consume_wavg(session, product_id: int, qty: int):
 
     # 2️⃣ costo total
 
-    total_cost = avg_price * qty
+    total_cost = avg_price * ammount
 
     # 3️⃣ descontar stock físico
 
-    remaining = qty
+    remaining = ammount
 
     batches = session.scalars(
         select(Batch)
