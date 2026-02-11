@@ -6,7 +6,7 @@ from .lifo import lifo_price
 from .wavg import weighted_avg_price
 
 
-def calc_product_price(session, product):
+def calc_product_price(session, product:Product):
 
     match product.price_formula:
 

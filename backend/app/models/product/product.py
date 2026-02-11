@@ -62,7 +62,7 @@ class Product(Base):
     move_details: Mapped[List["MoveDetail"]] = relationship(back_populates="product")
     bulk_discounts: Mapped[List["DiscountBulk"]] = relationship(
         back_populates="product",
-        order_by="DiscountBulk.min_qty.asc()"
+        order_by="DiscountBulk.min_ammount.asc()"
     )
     unit_id: Mapped[int] = mapped_column(Integer, ForeignKey("unit.id"), nullable=False, default=1)
     unit: Mapped["Unit"] = relationship(back_populates="products")

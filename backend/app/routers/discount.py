@@ -22,7 +22,11 @@ def get_db():
 
 @router.post("/", response_model=schemas.DiscountBulk)
 def create_discount_bulk(discount: schemas.DiscountBulkCreate, db: Session = Depends(get_db)):
-    db_discount = discountBulk.DiscountBulk(**discount.dict())
+    db_discount = discountBulk.DiscountBulk(
+        id_product=discount.id_product,
+        min_ammount=discount.min_ammount,
+        discount=discount.discount
+    )
     db.add(db_discount)
     db.commit()
     db.refresh(db_discount)

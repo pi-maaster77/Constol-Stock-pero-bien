@@ -3,7 +3,7 @@
 def apply_bulk_discount(product, ammount, base_price):
 
     for rule in reversed(product.bulk_discounts):
-        if ammount >= rule.min_qty:
-            return base_price * (1 - rule.discount_pct)
+        if ammount >= rule.min_ammount:
+            return base_price * (1 - rule.discount)
 
     return base_price

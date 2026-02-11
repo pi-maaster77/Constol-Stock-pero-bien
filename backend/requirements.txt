@@ -5,6 +5,7 @@ sqlalchemy
 
 # DEV DEPENDENCIES
 pytest 
-pytest-asyncio 
+pytest-asyncio
+pytest-env 
 httpx
 dotenv

@@ -9,7 +9,7 @@ from app.models.product.product import PriceFormula
 from app.models.product.unit.defaultUnits import DefaultUnits
 
 from .mode_detail import MoveDetailRead, ProductSelling, TicketLine
-from ..barch import BatchCreate
+from ..batch import BatchCreate
 
 
 class MovesIn(BaseModel):

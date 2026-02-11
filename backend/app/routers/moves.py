@@ -30,21 +30,46 @@ def products_in(products_in: schemas.MovesIn, db: Session = Depends(get_db)):
         db.flush()
 
         for item in products_in.details:
+            product = db.get(Product, item.id_product)
+
+            if not product:
+                raise HTTPException(404, "Product not found")
+
+            if product.expires and not item.expires_at:
+                raise HTTPException(
+                    400,
+                    "This product requires expiration date"
+                )
+
+            if not product.expires and item.expires_at:
+                raise HTTPException(
+                    400,
+                    "This product must NOT have expiration date"
+                )
 
             # crear batch
             batch = Batch(
                 id_product=item.id_product,
-                date=item.date,
+                received_at=item.received_at,
+                expires_at=item.expires_at,
                 ammount=item.ammount,
-                price=item.price
+                cost_price=item.cost_price
             )
+
             db.add(batch)
 
             # registrar detalle del movimiento
             detail = MoveDetail(
                 id_move=move.id,
                 id_product=item.id_product,
-                ammount=item.ammount
+                ammount=item.ammount,
+                product_name=product.name,
+                unit_price=item.cost_price,
+                unit_price_final=item.cost_price,
+                discount_percent=0,
+                discount_amount=0,
+                subtotal=item.cost_price * item.ammount,
+                total=item.cost_price * item.ammount
             )
             db.add(detail)
             # actualizar stock producto
@@ -52,9 +77,9 @@ def products_in(products_in: schemas.MovesIn, db: Session = Depends(get_db)):
             if product == None:
                 raise HTTPException(status_code=404, detail="Product not found")
             product.ammount += item.ammount
-        db.commit()
-        db.refresh(move)
-
+            db.commit()
+            db.refresh(move)
+        
         from sqlalchemy.orm import selectinload
 
         move = (
@@ -97,7 +122,7 @@ def products_out(products_out: schemas.MovesOut, db: Session = Depends(get_db)):
         discount_percent = 0
 
         for d in product.bulk_discounts:
-            if ammount >= d.min_qty:
+            if ammount >= d.min_ammount:
                 discount_percent = d.discount
 
         discount_amount = unit_price * discount_percent
@@ -112,7 +137,7 @@ def products_out(products_out: schemas.MovesOut, db: Session = Depends(get_db)):
         batches = (
             db.query(Batch)
             .filter(Batch.id_product == product.id, Batch.ammount > 0)
-            .order_by(Batch.date)
+            .order_by(Batch.received_at)
             .with_for_update()
             .all()
         )
@@ -132,22 +157,28 @@ def products_out(products_out: schemas.MovesOut, db: Session = Depends(get_db)):
 
         # ---------- snapshot ----------
         detail = MoveDetail(
-            move_id=move.id,
-            product_id=product.id,
+            id_move=move.id,
+            id_product=product.id,
             product_name=product.name,
             ammount=ammount,
-            unit_price_original=unit_price,
+            unit_price=unit_price,
             discount_percent=discount_percent,
             discount_amount=discount_amount,
             unit_price_final=final_price,
-            line_total=line_total,
+            subtotal=unit_price * ammount,
+            total=line_total,
         )
 
         db.add(detail)
 
     move.total = ticket_total
 
-    db.commit()
-    db.refresh(move)
+    try:
+        db.commit()    
+        db.refresh(move)
+    except:
+        db.rollback()
+        raise
+
 
     return move

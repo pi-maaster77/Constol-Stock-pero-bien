@@ -24,7 +24,7 @@ class MoveDetailRead(BaseModel):
 
 
 class TicketLine(BaseModel):
-    product_id: int
+    id_product: int
     product_name: str
     ammount: int
 

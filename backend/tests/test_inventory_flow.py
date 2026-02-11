@@ -24,8 +24,9 @@ def setup_inventory(session: Session, formula: PriceFormula):
     batch1 = Batch(
         id_product=product.id,
         ammount=10,
-        price=100,
-        date=date(2026, 3, 1)
+        cost_price=100,
+        received_at=date(2026, 2, 1),
+        expires_at=date(2026, 3, 1)
     )
 
     # compra 2: 10 @150
@@ -33,8 +34,9 @@ def setup_inventory(session: Session, formula: PriceFormula):
     batch2 = Batch(
         id_product=product.id,
         ammount=10,
-        price=150,
-        date=date(2026, 4, 1)
+        cost_price=150,
+        received_at=date(2026, 3, 1),
+        expires_at=date(2026, 4, 1)
     )
 
     session.add_all([batch1, batch2])

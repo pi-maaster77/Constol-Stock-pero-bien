@@ -24,10 +24,10 @@ def setup_product_with_discounts(session: Session) -> Product:
     session.flush()  # Para obtener el product.id
 
     # Regla 1: 10% de descuento a partir de 5 unidades
-    discount1 = DiscountBulk(product_id=product.id, min_qty=5, discount_pct=0.10)
+    discount1 = DiscountBulk(id_product=product.id, min_ammount=5, discount=0.10)
 
     # Regla 2: 20% de descuento a partir de 10 unidades
-    discount2 = DiscountBulk(product_id=product.id, min_qty=10, discount_pct=0.20)
+    discount2 = DiscountBulk(id_product=product.id, min_ammount=10, discount=0.20)
 
     session.add_all([discount1, discount2])
     session.commit()
@@ -57,7 +57,7 @@ def test_calculate_discounted_price_with_rules(
 
     # 2. Ejecución
     final_price = calculate_discounted_price(
-        session=session, product_id=product.id, ammount=ammount
+        session=session, id_product=product.id, ammount=ammount
     )
 
     # 3. Aserción
@@ -80,7 +80,7 @@ def test_calculate_price_for_product_without_discounts(session: Session):
 
     # 2. Ejecución
     final_price = calculate_discounted_price(
-        session=session, product_id=product.id, ammount=10
+        session=session, id_product=product.id, ammount=10
     )
 
     # 3. Aserción
