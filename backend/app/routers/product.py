@@ -23,7 +23,14 @@ def get_db():
 
 @router.post("/", response_model=schemas.ProductReturn)
 def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
-    db_product = Product(**product.dict())
+    db_product = Product(
+        bc=product.bc,
+        name=product.name,
+        price_formula=product.price_formula,
+        public_price=product.public_price,
+        unit_id=product.unit_id,
+        expires=product.expires
+    )
     db.add(db_product)
     db.commit()
     db.refresh(db_product)
