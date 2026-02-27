@@ -22,7 +22,9 @@ class ISODateString {
 
   // Método para obtener el string que espera tu JSON/API
   toISOString(): string {
-    return this._date.toISOString().split('T')[0]; 
+    const date = this._date.toISOString().split('T')[0]
+    if(!date) throw new Error("Fecha inválida");
+    return date; 
   }
 
   // Getter para usar funciones de fecha nativas
@@ -172,7 +174,7 @@ export interface components {
     schemas: {
         /** BatchCreate */
         BatchCreate: {
-            /** Id Product */
+            /** ID Product */
             id_product: number;
             /**
              * Received At
@@ -193,18 +195,18 @@ export interface components {
         DefaultUnits: 1 | 2 | 3;
         /** DiscountBulk */
         DiscountBulk: {
-            /** Id Product */
+            /** ID Product */
             id_product: number;
             /** Min Ammount */
             min_ammount: number;
             /** Discount */
             discount: number;
-            /** Id */
+            /** ID */
             id: number;
         };
         /** DiscountBulkCreate */
         DiscountBulkCreate: {
-            /** Id Product */
+            /** ID Product */
             id_product: number;
             /** Min Ammount */
             min_ammount: number;
@@ -225,14 +227,14 @@ export interface components {
         };
         /** MoveDetailRead */
         MoveDetailRead: {
-            /** Id Product */
+            /** ID Product */
             id_product: number;
             /** Ammount */
             ammount: number;
         };
         /** MoveInRead */
         MoveInRead: {
-            /** Id */
+            /** ID */
             id: number;
             /**
              * Date
@@ -244,7 +246,7 @@ export interface components {
         };
         /** MoveOutRead */
         MoveOutRead: {
-            /** Id */
+            /** ID */
             id: number;
             /**
              * Date
@@ -319,7 +321,7 @@ export interface components {
             unit_id: components["schemas"]["DefaultUnits"];
             /** Expires */
             expires: boolean;
-            /** Id */
+            /** ID */
             id: number;
             /** Ammount */
             ammount: number;
@@ -328,14 +330,14 @@ export interface components {
         };
         /** ProductSelling */
         ProductSelling: {
-            /** Id Product */
+            /** ID Product */
             id_product: number;
             /** Ammount */
             ammount: number;
         };
         /** TicketLine */
         TicketLine: {
-            /** Id Product */
+            /** ID Product */
             id_product: number;
             /** Product Name */
             product_name: string;

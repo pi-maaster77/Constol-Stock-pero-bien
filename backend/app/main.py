@@ -10,7 +10,8 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="control de stock bien",
-    version="BETA"
+    version="BETA",
+    openapi_prefix="/api"
 )
 
 app.include_router(product.router)
