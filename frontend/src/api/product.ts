@@ -1,4 +1,5 @@
 // frontend/src/api/product.ts
+
 import type { components } from "@/types/api";
 import axios from "axios";
 import config from "./config.json";

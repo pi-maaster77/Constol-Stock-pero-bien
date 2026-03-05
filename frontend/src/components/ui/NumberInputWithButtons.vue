@@ -17,7 +17,8 @@ import ButtonIncrement from '../ui/ButtonIncrement.vue';
 import NumberInput from '../ui/NumberInput.vue';
 
 defineProps<{
-    modelValue: number | string
+    modelValue: number
+    mode?: 'int' | 'float'
 }>();
 
 const emit = defineEmits(['increment', 'decrement', 'update:modelValue'])
@@ -32,6 +33,6 @@ function decrement(){
 
 // 2. El evento que viene de NumberInput ya es el valor, no el objeto Event
 function change(value: string | number){
-    emit('update:modelValue', value)
+    emit('update:modelValue', Number(value))
 }
 </script>

@@ -4,6 +4,7 @@
   <input
     type="number"
     :value="modelValue"
+    :step="mode === 'float' ? 'any' : 1"
     @input="handleInput"
     @blur="handleBlur"
     class="form-control"
@@ -11,28 +12,74 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-    modelValue: number | string
-}>();
+const props = withDefaults(defineProps<{
+    modelValue: number
+    mode?: 'int' | 'float'
+}>(), {
+  mode: 'int'
+});
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: number): void
 }>();
 
 const handleInput = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    // valueAsNumber devuelve un número real o NaN si está vacío
-    const val = target.valueAsNumber;
-    if (!isNaN(val)) {
-        emit('update:modelValue', val);
-    }
-};
+  const target = event.target as HTMLInputElement
+  let value = target.value
+
+  if (props.mode === 'int') {
+    value = value.replace(/[^0-9-]/g, '')
+    value = value.replace(/(?!^)-/g, '') // solo un - al inicio
+  } else {
+    value = value.replace(/[^0-9.-]/g, '')
+    value = value.replace(/(?!^)-/g, '') // solo un -
+    value = value.replace(/(\..*)\./g, '$1') // solo un punto
+  }
+
+  target.value = value
+
+  const num = Number(value)
+  if (!isNaN(num)) {
+    emit('update:modelValue', props.mode === 'int' ? Math.trunc(num) : num)
+  }
+}
 
 const handleBlur = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    // Forzamos la actualización final al salir del foco
-    emit('update:modelValue', target.valueAsNumber || 0);
+  const target = event.target as HTMLInputElement;
+  let value = target.value
+
+  if (props.mode === 'int') {
+    value = value.replace(/[^0-9-]/g, '')
+    value = value.replace(/(?!^)-/g, '') // solo un - al inicio
+  } else {
+    value = value.replace(/[^0-9.-]/g, '')
+    value = value.replace(/(?!^)-/g, '') // solo un -
+    value = value.replace(/(\..*)\./g, '$1') // solo un punto
+  }
+
+  target.value = value
+
+  const num = Number(value)
+  if (!isNaN(num)) {
+    emit('update:modelValue', props.mode === 'int' ? Math.trunc(num) : num)
+  } else {
+    emit('update:modelValue', 0)
+  }
 };
+
+function normalize(value: string | number): number {
+    let num = typeof value === 'string'
+        ? Number(value)
+        : value
+
+    if (isNaN(num)) return 0
+
+    if (props.mode === 'int') {
+        return Math.trunc(num)
+    }
+
+    return num
+}
 </script>
 
 <style>
@@ -45,7 +92,8 @@ input::-webkit-inner-spin-button {
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield; /* ignore */
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 </style>

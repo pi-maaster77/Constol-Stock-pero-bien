@@ -6,7 +6,7 @@ from os import environ as env
 
 import os
 
-if os.getenv("PYTEST_CURRENT_TEST") is None:
+if env.get("PYTEST_CURRENT_TEST") is None:
     try:
         import dotenv
         dotenv.load_dotenv()
