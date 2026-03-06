@@ -3,7 +3,7 @@
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from .inventoryIn import register_in
-from .out import register_out
+from .inventoryOut import register_out
 
 from app.database import engine
 

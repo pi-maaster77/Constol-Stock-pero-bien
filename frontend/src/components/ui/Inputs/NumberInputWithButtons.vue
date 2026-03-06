@@ -1,4 +1,4 @@
-<!-- frontend/src/components/ui/NumberInputWithButtons.vue -->
+<!-- frontend/src/components/ui/Inputs/NumberInputWithButtons.vue -->
 
 <template>
     <span class="input-group">
@@ -6,23 +6,28 @@
             :modelValue="modelValue"
             @update:modelValue="change" 
         />
-        <ButtonIncrement @click="increment" />
-        <ButtonDecrement @click="decrement" />
+        <div class="btn-group" role="group">
+            <ButtonIncrement @click="increment" />
+            <ButtonDecrement @click="decrement" />
+        </div>
     </span>
 </template>
 
 <script setup lang="ts">
-import ButtonDecrement from '../ui/ButtonDecrement.vue';
-import ButtonIncrement from '../ui/ButtonIncrement.vue';
-import NumberInput from '../ui/NumberInput.vue';
+import ButtonDecrement from '../Buttons/ButtonDecrement.vue';
+import ButtonIncrement from '../Buttons/ButtonIncrement.vue';
+import NumberInput from './NumberInput.vue';
 
 defineProps<{
     modelValue: number
     mode?: 'int' | 'float'
 }>();
 
-const emit = defineEmits(['increment', 'decrement', 'update:modelValue'])
-
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: number): void
+    (e: 'increment'): void
+    (e: 'decrement'): void
+}>();
 function increment(){
     emit('increment')
 }

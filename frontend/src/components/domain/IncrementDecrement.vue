@@ -11,7 +11,7 @@
 <script setup lang="ts">
 
 import { computed } from 'vue';
-import NumberInputWithButtons from '../ui/NumberInputWithButtons.vue';
+import NumberInputWithButtons from '../ui/Inputs/NumberInputWithButtons.vue';
 import { useCounterStore } from '@/stores/counter';
 
 const counterStore = useCounterStore()
