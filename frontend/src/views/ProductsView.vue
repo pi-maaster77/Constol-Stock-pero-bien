@@ -1,4 +1,4 @@
-<!-- frontend/src/vews/ProductsView.vue -->
+<!-- frontend/src/views/ProductsView.vue -->
 
 <template>
     <CreateEditProduct 

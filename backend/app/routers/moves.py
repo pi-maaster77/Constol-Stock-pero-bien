@@ -41,3 +41,18 @@ def products_out(products_out: schemas.MovesOut, db: Session = Depends(get_db)):
         raise
     except:
         raise
+
+@router.post("/ADJUST", response_model=schemas.MoveAdjustRead)
+def products_adjust(products_adjust: schemas.MovesAdjust, db: Session = Depends(get_db)):
+    try:
+        return InventoryService(db).register_adjustment(products_adjust)
+    except ValueError:
+        raise
+    except:
+        raise
+
+@router.get("/", response_model=List[schemas.MoveRead])
+def read_moves(skip: int = 0, limit: int = 100, db:
+    Session = Depends(get_db)):
+    moves = db.query(Move).all()
+    return moves

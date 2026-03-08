@@ -22,5 +22,5 @@ class Move(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     date: Mapped[Optional[date]]
 
-
+    reason: Mapped[Optional[str]] = mapped_column(nullable=True)
     details: Mapped[List["MoveDetail"]] = relationship(back_populates="move")

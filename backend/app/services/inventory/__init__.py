@@ -4,6 +4,7 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 from .inventoryIn import register_in
 from .inventoryOut import register_out
+from .inventoryAdjustment import register_adjust
 
 from app.database import engine
 
@@ -20,3 +21,4 @@ class InventoryService:
 
     register_entry = register_in
     register_exit = register_out
+    register_adjustment = register_adjust

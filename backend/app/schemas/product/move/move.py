@@ -28,7 +28,6 @@ class MoveInRead(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
-
 class MoveOutRead(BaseModel):
     id: int
     date: datetime.date
@@ -36,3 +35,23 @@ class MoveOutRead(BaseModel):
     details: list[TicketLine]
 
     model_config = ConfigDict(from_attributes=True)
+
+class MovesAdjust(BaseModel):
+    reason: Optional[str] = None
+    date: datetime.date
+    details: list[BatchCreate]
+
+class MoveAdjustRead(BaseModel):
+    id: int
+    date: datetime.date
+    details: list[MoveDetailRead]
+
+    model_config = ConfigDict(from_attributes=True)
+
+class MoveRead(BaseModel):
+    id: int
+    date: datetime.date
+    type: str
+    details: list[MoveDetailRead]
+
+    model_config = ConfigDict(from_attributes=True) 
