@@ -6,34 +6,34 @@
       <slot name="label"></slot>
     </div>
     <input
-      type="number"
+      type="text"
       :value="modelValue"
-      @input="handleInput"
-      @blur="handleBlur"
+      @input="e => emit('update:modelValue', (e.target as HTMLInputElement).value)"
       class="form-control"
       :disabled="disabled"
     />
   </div>
 </template>
 
-<script setup lang="ts"> 
+<script setup lang="ts">
 
-defineProps<{
-    modelValue: string
-    disabled?: boolean
-}>();
-
+const props = defineProps<{
+  modelValue: string
+  disabled?: boolean
+}>()
 
 const emit = defineEmits<{
-    (e: 'update:modelValue', value: string): void
-}>();
-const handleInput = (event: Event) => {
-  const target = event.target as HTMLInputElement
-  emit('update:modelValue', target.value)
+  (e: 'update:modelValue', value: string): void
+}>()
+
+function update(event: Event) {
+  const value = (event.target as HTMLInputElement).value
+  emit('update:modelValue', value)
 }
-const handleBlur = (event: Event) => {
-    const target = event.target as HTMLInputElement
-    emit('update:modelValue', target.value.trim())
+
+function blur(event: Event) {
+  const value = (event.target as HTMLInputElement).value.trim()
+  emit('update:modelValue', value)
 }
 
 </script>

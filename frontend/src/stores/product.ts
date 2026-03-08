@@ -60,5 +60,52 @@ export const useProductsStore = defineStore('products', () => {
         products.value.splice(0, products.value.length, ...value)
     }
 
-    return { products, productCount, load, getProductByID, set }
+    function create(product: Omit<Product, 'id'>) {
+        optimistic(() => {
+            const tempID = Math.max(0, ...products.value.map(p => p.id)) + 1
+            products.value.push({ id: tempID, ...product })
+        }, async () => {
+            const res = await createProduct({
+                bc: product.bc,
+                name: product.name,
+                unit_id: product.unit_id,
+                price_formula: product.price_formula,
+                public_price: product.public_price,
+                expires: product.expires,
+            })
+            load()
+        })
+    }
+
+    function updateByID(id: number, product: Omit<Product, 'id'>) {
+        optimistic(() => {
+            const index = products.value.findIndex(p => p.id === id)
+            if (index !== -1) {
+                products.value[index] = { id, ...product }
+            }
+        }, async () => {
+            await updateProduct(id, {
+                bc: product.bc,
+                name: product.name,
+                unit_id: product.unit_id,
+                price_formula: product.price_formula,
+                public_price: product.public_price,
+                expires: product.expires,
+            })
+            load()
+        })
+    }
+
+    function deleteByID(id: number) {
+        optimistic(() => {
+            const index = products.value.findIndex(p => p.id === id)
+            if (index !== -1) {
+                products.value.splice(index, 1)
+            }
+        }, async () => {
+            await deleteProduct(id)
+            load()
+        })
+    }
+    return { products, productCount, load, getProductByID, set, create, updateByID, deleteByID }
 })

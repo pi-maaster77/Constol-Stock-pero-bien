@@ -8,9 +8,10 @@ from app.models.product.product import PriceFormula
 from app.models.product.unit.defaultUnits import DefaultUnits
 
 class UnitBase(BaseModel):
-    id: int
+    
     name: str
     abbreviation: str
+
 
 class UnitCreate(UnitBase):
     name: str
@@ -22,8 +23,5 @@ class UnitPatch(BaseModel):
     abbreviation: Optional[str] = None
 
 class UnitReturn(UnitBase):
-    active: bool
-    created_at: datetime.date
-    updated_at: datetime.date
-
+    id: int
     model_config = ConfigDict(from_attributes=True)

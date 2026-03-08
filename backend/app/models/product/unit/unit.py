@@ -20,6 +20,6 @@ class Unit(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
-    abreviation: Mapped[str]
+    abbreviation: Mapped[str]
 
     products: Mapped[List["Product"]] = relationship(back_populates="unit")

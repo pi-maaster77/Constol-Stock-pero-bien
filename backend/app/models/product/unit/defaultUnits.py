@@ -3,9 +3,9 @@
 import enum
 
 default_units = [
-    {"id": 1, "name": "Unidad", "abreviation": "u"},
-    {"id": 2, "name": "Gramo", "abreviation": "g"},
-    {"id": 3, "name": "Mililitro", "abreviation": "ml"},
+    {"id": 1, "name": "Unidad", "abbreviation": "u"},
+    {"id": 2, "name": "Gramo", "abbreviation": "g"},
+    {"id": 3, "name": "Mililitro", "abbreviation": "ml"},
 ]
 
 

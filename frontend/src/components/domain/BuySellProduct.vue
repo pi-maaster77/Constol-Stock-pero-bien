@@ -28,26 +28,12 @@
 
 
 <script setup lang="ts">
-/*
-CREATE TABLE product ( 
-	bc VARCHAR NOT NULL, 
-	name VARCHAR NOT NULL, 
-	ammount INTEGER NOT NULL, 
-	expires BOOLEAN NOT NULL,   
-	price_formula VARCHAR(4) NOT NULL, 
-	public_price FLOAT NOT NULL, 
-	unit_id INTEGER NOT NULL, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY(unit_id) REFERENCES unit (id)
-)
-
-*/
 
 import { computed, ref } from 'vue';
 import NumberInputWithButtons from '../ui/Inputs/NumberInputWithButtons.vue';
 import { useCounterStore } from '@/stores/counter';
 import NumberInput from '../ui/Inputs/NumberInput.vue';
-import TextInput from '../ui/Inputs/TextInput.vue';
+import TextInput from '../ui/TextInput.vue';
 
 import type { Product } from '@/types/product';
 const counterStore = useCounterStore()

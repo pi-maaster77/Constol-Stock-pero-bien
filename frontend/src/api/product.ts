@@ -32,6 +32,7 @@ export const createProduct = async (
 		`${apiUrl}${paths.products}`,
 		product,
 	);
+	console.log(response.data);
 	return response.data;
 };
 

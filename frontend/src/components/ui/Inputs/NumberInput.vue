@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-    modelValue: number
+    modelValue: number | string
     mode?: 'int' | 'float' | 'barcode'
 }>(), {
   mode: 'int'

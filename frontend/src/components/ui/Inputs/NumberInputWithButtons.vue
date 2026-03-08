@@ -11,7 +11,7 @@
             </template>
         </NumberInput>
         <div class="btn-group" role="group">
-            <ButtonIncrement @click="increment" />
+            <ButtonAdd @click="increment" />
             <ButtonDecrement @click="decrement" />
         </div>
     </span>
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import ButtonDecrement from '../Buttons/ButtonDecrement.vue';
-import ButtonIncrement from '../Buttons/ButtonIncrement.vue';
+import ButtonAdd from '../Buttons/ButtonAdd.vue';
 import NumberInput from './NumberInput.vue';
 
 defineProps<{

@@ -35,7 +35,7 @@ def create_unit(unit: schemas.UnitCreate, db: Session = Depends(get_db)):
 @router.get("/", response_model=List[schemas.UnitReturn])
 def read_units(skip: int = 0, limit: int = 100, db:
     Session = Depends(get_db)):
-    units = db.query(Unit).filter(Unit.active == True).offset(skip).limit(limit).all()
+    units = db.query(Unit).all()
     return units
 
 @router.get("/{id_unit}", response_model=schemas.UnitReturn)
