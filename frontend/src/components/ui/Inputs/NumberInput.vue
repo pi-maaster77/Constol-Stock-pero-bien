@@ -1,20 +1,25 @@
-<!-- frontend/src/components/ui/NumberInput.vue -->
+<!-- frontend/src/components/ui/Inputs/NumberInput.vue -->
 
 <template>
-  <input
-    type="number"
-    :value="modelValue"
-    :step="mode === 'float' ? 'any' : 1"
-    @input="handleInput"
-    @blur="handleBlur"
-    class="form-control"
-  />
+  <div class="input-wrapper">
+    <div class="input-label" v-if="$slots.label">
+      <slot name="label"></slot>
+    </div>
+    <input
+      type="number"
+      :value="modelValue"
+      :step="mode === 'float' ? 'any' : 1"
+      @input="handleInput"
+      @blur="handleBlur"
+      class="form-control"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
     modelValue: number
-    mode?: 'int' | 'float'
+    mode?: 'int' | 'float' | 'barcode'
 }>(), {
   mode: 'int'
 });
@@ -30,10 +35,14 @@ const handleInput = (event: Event) => {
   if (props.mode === 'int') {
     value = value.replace(/[^0-9-]/g, '')
     value = value.replace(/(?!^)-/g, '') // solo un - al inicio
-  } else {
+  } else if (props.mode === 'float') {
     value = value.replace(/[^0-9.-]/g, '')
     value = value.replace(/(?!^)-/g, '') // solo un -
     value = value.replace(/(\..*)\./g, '$1') // solo un punto
+  } else if (props.mode === 'barcode') {
+    value = value.replace(/[^0-9]/g, '')
+    // Provablemente tenga que hacer que se configure de manera externa el largo del código de barras, pero por ahora lo dejo fijo
+    value.length > 20 && (value = value.slice(8, 20))
   }
 
   target.value = value

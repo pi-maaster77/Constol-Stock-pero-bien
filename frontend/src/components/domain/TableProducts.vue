@@ -21,5 +21,4 @@ const productAtributes = ['Código de barras', 'Nombre', 'Precio', 'Cantidad', '
 const productStore = useProductsStore()
 const { products } = productStore
 
-
 </script>

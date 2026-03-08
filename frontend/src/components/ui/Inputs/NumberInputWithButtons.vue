@@ -5,7 +5,11 @@
         <NumberInput
             :modelValue="modelValue"
             @update:modelValue="change" 
-        />
+        >
+            <template #label v-if="$slots.label">
+                <slot name="label"></slot>
+            </template>
+        </NumberInput>
         <div class="btn-group" role="group">
             <ButtonIncrement @click="increment" />
             <ButtonDecrement @click="decrement" />

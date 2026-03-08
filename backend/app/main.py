@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
 from app.database import engine, Base
-from app.routers import product, discount, moves
+from app.routers import product, discount, moves, unit
 import app.models.__init__
 
 if env.get("PYTEST_CURRENT_TEST") is None:
@@ -45,6 +45,7 @@ app.add_middleware(
 app.include_router(product.router)
 app.include_router(discount.router)
 app.include_router(moves.router)
+app.include_router(unit.router)
 
 @app.get("/")
 def read_root():
