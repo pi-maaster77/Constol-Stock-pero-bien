@@ -19,7 +19,8 @@ def register_adjust(self: InventoryService, products_adjust: schemas.MovesAdjust
     try:
         move = Move(
             date=products_adjust.date,
-            reason=products_adjust.reason
+            reason=products_adjust.reason,
+            type="adjust"
         )
 
         self.db.add(move)
@@ -55,12 +56,14 @@ def register_adjust(self: InventoryService, products_adjust: schemas.MovesAdjust
                 id_product=item.id_product,
                 ammount=item.ammount,
                 product_name=product.name,
+                bc_product=product.bc,
+                unit=product.unit_id,
                 unit_price=item.cost_price,
                 unit_price_final=item.cost_price,
                 discount_percent=0,
                 discount_amount=0,
                 subtotal=item.cost_price * item.ammount,
-                total=item.cost_price * item.ammount
+                total_price=item.cost_price * item.ammount
             )
 
             self.db.add(detail)

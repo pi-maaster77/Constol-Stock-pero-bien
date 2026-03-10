@@ -116,6 +116,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/moves/adjust": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Products Adjust */
+        post: operations["products_adjust_moves_adjust_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/moves/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Read Moves */
+        get: operations["read_moves_moves__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/unit/": {
         parameters: {
             query?: never;
@@ -226,12 +260,33 @@ export interface components {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
+        /** MoveAdjustRead */
+        MoveAdjustRead: {
+            /** Id */
+            id: number;
+            /**
+             * Date
+             * Format: date
+             */
+            date: ISODateString;
+            /** Details */
+            details: components["schemas"]["MoveDetailRead"][];
+        };
         /** MoveDetailRead */
         MoveDetailRead: {
             /** Id Product */
             id_product: number;
+            /** Bc Product */
+            bc_product: string;
+            /** Product Name */
+            product_name: string;
+            unit: components["schemas"]["DefaultUnits"];
             /** Ammount */
             ammount: number;
+            /** Unit Price */
+            unit_price: number;
+            /** Total Price */
+            total_price: number;
         };
         /** MoveInRead */
         MoveInRead: {
@@ -258,6 +313,32 @@ export interface components {
             total: number;
             /** Details */
             details: components["schemas"]["TicketLine"][];
+        };
+        /** MoveRead */
+        MoveRead: {
+            /** Id */
+            id: number;
+            /**
+             * Date
+             * Format: date
+             */
+            date: ISODateString;
+            /** Type */
+            type: string;
+            /** Details */
+            details: components["schemas"]["MoveDetailRead"][];
+        };
+        /** MovesAdjust */
+        MovesAdjust: {
+            /** Reason */
+            reason?: string | null;
+            /**
+             * Date
+             * Format: date
+             */
+            date: ISODateString;
+            /** Details */
+            details: components["schemas"]["BatchCreate"][];
         };
         /** MovesIn */
         MovesIn: {
@@ -353,8 +434,6 @@ export interface components {
         };
         /** UnitCreate */
         UnitCreate: {
-            /** Id */
-            id: number;
             /** Name */
             name: string;
             /** Abbreviation */
@@ -371,24 +450,12 @@ export interface components {
         };
         /** UnitReturn */
         UnitReturn: {
-            /** Id */
-            id: number;
             /** Name */
             name: string;
             /** Abbreviation */
             abbreviation: string;
-            /** Active */
-            active: boolean;
-            /**
-             * Created At
-             * Format: date
-             */
-            created_at: ISODateString;
-            /**
-             * Updated At
-             * Format: date
-             */
-            updated_at: ISODateString;
+            /** Id */
+            id: number;
         };
         /** ValidationError */
         ValidationError: {
@@ -785,6 +852,71 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MoveOutRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    products_adjust_moves_adjust_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MovesAdjust"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MoveAdjustRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    read_moves_moves__get: {
+        parameters: {
+            query?: {
+                skip?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MoveRead"][];
                 };
             };
             /** @description Validation Error */

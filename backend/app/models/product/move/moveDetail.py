@@ -16,6 +16,8 @@ class MoveDetail(Base):
 
     # snapshot producto
     product_name: Mapped[str] = mapped_column(String)
+    bc_product: Mapped[str] = mapped_column(String)
+    unit: Mapped[int] = mapped_column(Integer)
 
     # cantidad
     ammount: Mapped[int]
@@ -30,7 +32,7 @@ class MoveDetail(Base):
 
     # totales
     subtotal: Mapped[float] = mapped_column(Float)           # unit_price * ammount
-    total: Mapped[float] = mapped_column(Float)              # unit_price_final * ammount
+    total_price: Mapped[float] = mapped_column(Float)              # unit_price_final * ammount
 
     move: Mapped["Move"] = relationship(back_populates="details")
     product: Mapped["Product"] = relationship(back_populates="move_details")

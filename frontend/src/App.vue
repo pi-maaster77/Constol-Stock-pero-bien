@@ -9,6 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import ProductsView from './views/ProductsView.vue';
 
 import {ref} from 'vue'
+import TableMoves from './components/domain/TableMoves.vue';
 const tabActiva = ref('Productos')
 </script>
 
@@ -43,7 +44,7 @@ const tabActiva = ref('Productos')
       </div>
 
       <div v-if="tabActiva === 'tags'" class="tab-pane fade show active">
-        <h1>Entradas/Salidas</h1>
+        <TableMoves />
       </div>
     </div>
   </div>

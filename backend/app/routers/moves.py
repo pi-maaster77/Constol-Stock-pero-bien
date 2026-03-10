@@ -42,7 +42,7 @@ def products_out(products_out: schemas.MovesOut, db: Session = Depends(get_db)):
     except:
         raise
 
-@router.post("/ADJUST", response_model=schemas.MoveAdjustRead)
+@router.post("/adjust", response_model=schemas.MoveAdjustRead)
 def products_adjust(products_adjust: schemas.MovesAdjust, db: Session = Depends(get_db)):
     try:
         return InventoryService(db).register_adjustment(products_adjust)

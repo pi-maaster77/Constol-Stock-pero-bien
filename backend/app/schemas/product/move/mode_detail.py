@@ -17,8 +17,12 @@ class ProductSelling(BaseModel):
 
 class MoveDetailRead(BaseModel):
     id_product: int
+    bc_product: str
+    product_name: str
+    unit: DefaultUnits
     ammount: int
-
+    unit_price: float
+    total_price: float
     model_config = ConfigDict(from_attributes=True)
 
 

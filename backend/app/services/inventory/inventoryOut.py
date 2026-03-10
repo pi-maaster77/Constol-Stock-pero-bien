@@ -20,7 +20,7 @@ from app.schemas.product.move import move as schemas
 
 def register_out(self:InventoryService, products_out: schemas.MovesOut):
     
-    move = Move(date=products_out.date)
+    move = Move(date=products_out.date, type="out")
     self.db.add(move)
     self.db.flush()
 
@@ -81,13 +81,15 @@ def register_out(self:InventoryService, products_out: schemas.MovesOut):
             id_move=move.id,
             id_product=product.id,
             product_name=product.name,
+            bc_product=product.bc,
+            unit=product.unit_id,
             ammount=ammount,
             unit_price=unit_price,
             discount_percent=discount_percent,
             discount_amount=discount_amount,
             unit_price_final=final_price,
             subtotal=unit_price * ammount,
-            total=line_total,
+            total_price=line_total,
         )
 
         self.db.add(detail)
