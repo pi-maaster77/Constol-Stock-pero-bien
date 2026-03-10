@@ -45,6 +45,23 @@ export interface paths {
         patch: operations["patch_product_product__id_product__patch"];
         trace?: never;
     };
+    "/product/bc/{bc_product}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Read Product By Bc */
+        get: operations["read_product_by_bc_product_bc__bc_product__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/discount_bulk/": {
         parameters: {
             query?: never;
@@ -616,6 +633,37 @@ export interface operations {
                 "application/json": components["schemas"]["ProductPatch"];
             };
         };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductReturn"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    read_product_by_bc_product_bc__bc_product__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                bc_product: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             /** @description Successful Response */
             200: {

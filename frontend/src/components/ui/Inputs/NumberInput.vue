@@ -17,16 +17,19 @@
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<{
+const props = withDefaults(
+  defineProps<{
     modelValue: number | string
     mode?: 'int' | 'float' | 'barcode'
-}>(), {
-  mode: 'int'
-});
+  }>(),
+  {
+    mode: 'int',
+  },
+)
 
 const emit = defineEmits<{
-    (e: 'update:modelValue', value: number): void
-}>();
+  (e: 'update:modelValue', value: number): void
+}>()
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -54,7 +57,7 @@ const handleInput = (event: Event) => {
 }
 
 const handleBlur = (event: Event) => {
-  const target = event.target as HTMLInputElement;
+  const target = event.target as HTMLInputElement
   let value = target.value
 
   if (props.mode === 'int') {
@@ -74,20 +77,18 @@ const handleBlur = (event: Event) => {
   } else {
     emit('update:modelValue', 0)
   }
-};
+}
 
 function normalize(value: string | number): number {
-    let num = typeof value === 'string'
-        ? Number(value)
-        : value
+  let num = typeof value === 'string' ? Number(value) : value
 
-    if (isNaN(num)) return 0
+  if (isNaN(num)) return 0
 
-    if (props.mode === 'int') {
-        return Math.trunc(num)
-    }
+  if (props.mode === 'int') {
+    return Math.trunc(num)
+  }
 
-    return num
+  return num
 }
 </script>
 
@@ -100,9 +101,8 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
-
 </style>

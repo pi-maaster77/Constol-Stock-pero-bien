@@ -1,40 +1,40 @@
 // frontend/src/types/ISODatingFormat.ts
 
 export class ISODateString {
-  private _date: Date;
+  private _date: Date
 
   constructor(value: Date | string | { year: number; month: number; day: number }) {
     if (value instanceof Date) {
-      this._date = value;
-    } else if (typeof value === "string") {
-      this._date = new Date(value);
+      this._date = value
+    } else if (typeof value === 'string') {
+      this._date = new Date(value)
     } else {
-      // Los meses en JS son 0-indexed (enero es 0), 
+      // Los meses en JS son 0-indexed (enero es 0),
       // por eso restamos 1 para que sea natural (1 = enero)
-      this._date = new Date(value.year, value.month - 1, value.day);
+      this._date = new Date(value.year, value.month - 1, value.day)
     }
 
     // Validación básica
     if (isNaN(this._date.getTime())) {
-      throw new Error("Fecha inválida");
+      throw new Error('Fecha inválida')
     }
   }
 
   // Método para obtener el string que espera tu JSON/API
   toISOString(): string {
     const date = this._date.toISOString().split('T')[0]
-    if(!date) throw new Error("Fecha inválida");
-    return date; 
+    if (!date) throw new Error('Fecha inválida')
+    return date
   }
 
   // Getter para usar funciones de fecha nativas
   get native(): Date {
-    return this._date;
+    return this._date
   }
 
   // Ejemplo de método de utilidad
   formatHuman(): string {
-    return this._date.toLocaleDateString();
+    return this._date.toLocaleDateString()
   }
 }
 /**

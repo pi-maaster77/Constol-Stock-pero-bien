@@ -48,6 +48,13 @@ def read_product(id_product: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Product not found")
     return db_product
 
+@router.get("/bc/{bc_product}", response_model=schemas.ProductReturn)
+def read_product_by_bc(bc_product: int, db: Session = Depends(get_db)):
+    db_product = db.query(Product).filter(Product.bc == bc_product).first()
+    if db_product is None:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return db_product
+
 @router.patch("/{id_product}", response_model=schemas.ProductReturn)
 def patch_product(
     id_product: int,

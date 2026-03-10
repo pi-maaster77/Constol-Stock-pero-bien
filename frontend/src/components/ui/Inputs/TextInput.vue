@@ -8,7 +8,7 @@
     <input
       type="text"
       :value="modelValue"
-      @input="e => emit('update:modelValue', (e.target as HTMLInputElement).value)"
+      @input="(e) => emit('update:modelValue', (e.target as HTMLInputElement).value)"
       class="form-control"
       :disabled="disabled"
     />
@@ -16,7 +16,6 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps<{
   modelValue: string
   disabled?: boolean
@@ -35,5 +34,4 @@ function blur(event: Event) {
   const value = (event.target as HTMLInputElement).value.trim()
   emit('update:modelValue', value)
 }
-
 </script>

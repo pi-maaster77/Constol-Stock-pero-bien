@@ -3,20 +3,19 @@
 import { defineStore } from 'pinia'
 import type { NotificationType } from '../types/notifications'
 
-
 interface Notification {
-  type: NotificationType,
-  text: string,
+  type: NotificationType
+  text: string
   timeout: number
 }
 
 export const useNotificationsStore = defineStore('notificaciones', {
   state: () => ({
-    notifications: [] as Notification[]
+    notifications: [] as Notification[],
   }),
 
   actions: {
-    push(type:NotificationType, text:string, timeout = 4000) {
+    push(type: NotificationType, text: string, timeout = 4000) {
       const n: Notification = { type, text, timeout }
       this.notifications.push(n)
 
@@ -28,6 +27,6 @@ export const useNotificationsStore = defineStore('notificaciones', {
 
     clear(i: number) {
       this.notifications.splice(i, 1)
-    }
-  }
+    },
+  },
 })

@@ -1,6 +1,6 @@
 // frontend/src/types/move.ts
 
-import type { components } from "@/types/api";
+import type { components } from '@/types/api'
 
 export type Move = components['schemas']['MoveRead']
 export type MoveIn = components['schemas']['MovesIn']

@@ -10,11 +10,11 @@ export const useCounterStore = defineStore('counter', () => {
     count.value++
   }
 
-  function decrement(){
+  function decrement() {
     count.value--
   }
 
-  function set(value:number){
+  function set(value: number) {
     count.value = value
   }
 

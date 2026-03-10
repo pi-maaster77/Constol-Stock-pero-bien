@@ -21,7 +21,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="control de stock bien",
     version="BETA",
-    openapi_prefix="/api"
+    root_path="/api"
 )
 
 client = env.get("CLIENT_URL") or "http://localhost:5173"

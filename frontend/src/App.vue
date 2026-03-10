@@ -1,15 +1,15 @@
 <!-- frontend/src/App.vue -->
 
 <script setup lang="ts">
-
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
-import ProductsView from './views/ProductsView.vue';
+import ProductsView from './views/ProductsView.vue'
 
-import {ref} from 'vue'
-import TableMoves from './components/domain/TableMoves.vue';
+import { ref } from 'vue'
+import TableMoves from './components/domain/TableMoves.vue'
+import MovesView from './views/MovesView.vue'
 const tabActiva = ref('Productos')
 </script>
 
@@ -17,8 +17,8 @@ const tabActiva = ref('Productos')
   <div class="container-fluid mt-3">
     <ul class="nav nav-tabs custom-notebook" role="tablist">
       <li class="nav-item">
-        <button 
-          class="nav-link" 
+        <button
+          class="nav-link"
           :class="{ active: tabActiva === 'Productos' }"
           @click="tabActiva = 'Productos'"
           type="button"
@@ -27,8 +27,8 @@ const tabActiva = ref('Productos')
         </button>
       </li>
       <li class="nav-item">
-        <button 
-          class="nav-link" 
+        <button
+          class="nav-link"
           :class="{ active: tabActiva === 'tags' }"
           @click="tabActiva = 'tags'"
           type="button"
@@ -44,9 +44,8 @@ const tabActiva = ref('Productos')
       </div>
 
       <div v-if="tabActiva === 'tags'" class="tab-pane fade show active">
-        <TableMoves />
+        <MovesView />
       </div>
     </div>
   </div>
-
 </template>

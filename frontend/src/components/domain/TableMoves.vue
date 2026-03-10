@@ -6,18 +6,24 @@ import DumbMove from '@/components/ui/DumbMove.vue'
 import type { Move } from '@/types/move'
 import { ISODateString } from '@/types/ISODatingFormat'
 import { useMovesStore } from '@/stores/moves'
+import ButtonUpdate from '@/components/ui/Buttons/ButtonUpdate.vue'
+import ButtonExport from '../ui/Buttons/ButtonExport.vue'
+import ButtonAdd from '../ui/Buttons/ButtonAdd.vue'
 
+const emit = defineEmits(['add'])
 const movesStore = useMovesStore()
 
 onMounted(async () => {
-    try {
-        movesStore.load()
-    } catch (error) {
-        console.error("Error al cargar movimientos:", error)
-    }  
+  try {
+    movesStore.load()
+  } catch (error) {
+    console.error('Error al cargar movimientos:', error)
+  }
 })
 
-
+function handleAdd() {
+  emit('add')
+}
 
 const isLoading = ref(false)
 </script>
@@ -25,11 +31,15 @@ const isLoading = ref(false)
 <template>
   <div class="container mt-4">
     <h3 class="mb-3">Historial de Movimientos</h3>
+    <div class="mb-3 btn-group" role="group">
+      <ButtonUpdate @click="movesStore.load" :disabled="isLoading" />
+      <ButtonAdd @click="handleAdd" />
+      <ButtonExport :disabled="true" />
+    </div>
 
     <div class="accordion" id="movesAccordion">
-      
-      <DumbMove 
-        v-for="item in movesStore.moves" 
+      <DumbMove
+        v-for="item in movesStore.moves"
         :key="item.id"
         :move="item as Move"
         :disabled="isLoading"
@@ -38,7 +48,6 @@ const isLoading = ref(false)
       <div v-if="movesStore.moves.length === 0" class="text-center p-5 border rounded bg">
         <p class="text-muted">No hay movimientos registrados.</p>
       </div>
-
     </div>
   </div>
 </template>

@@ -35,7 +35,7 @@ class Product(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    bc: Mapped[str] = mapped_column(String)
+    bc: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     name: Mapped[str] = mapped_column(String)
 
     ammount: Mapped[int] = mapped_column(Integer, default=0)
