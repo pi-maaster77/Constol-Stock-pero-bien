@@ -12,6 +12,9 @@ import TextArea from '@/components/ui/Inputs/TextArea.vue'
 import TextInput from '@/components/ui/Inputs/TextInput.vue'
 import { Modal } from 'bootstrap'
 import DateInput from '../ui/Inputs/DateInput.vue'
+import { useDiscountsStore } from '@/stores/discount'
+
+const discountStore = useDiscountsStore()
 
 const props = defineProps<{
   mode: 'buy' | 'sell' | 'adjust'
@@ -48,16 +51,14 @@ const finalPrice = computed(() => {
   // 2. Lógica para VENTA (Donde aplican los descuentos)
   if (props.mode === 'sell') {
     const basePrice = product.value.public_price || 0
-    
-    // Buscamos si hay un descuento por volumen para este producto y esta cantidad
-    // Nota: Buscamos el descuento que pide la mayor cantidad pero que sea <= a la actual
-    const applicableDiscount = discountsStore.discounts
-      .filter(d => d.product_id === product.value?.id && currentAmmount >= d.min_quantity)
-      .sort((a, b) => b.min_quantity - a.min_quantity)[0] // Tomamos el de mayor rango alcanzado
+
+    const applicableDiscount = discountStore.discounts
+      .filter(d => d.id_product === product.value?.id && currentAmmount >= d.min_ammount)
+      .sort((a, b) => b.min_ammount - a.min_ammount)[0] // Tomamos el de mayor rango alcanzado
 
     if (applicableDiscount) {
       // Aplicamos el precio especial del descuento
-      return applicableDiscount.discount_price * currentAmmount
+      return parseFloat((product.value.public_price*(1 - applicableDiscount.discount) * currentAmmount).toFixed(2))
     }
 
     // Si no hay descuento, precio normal
@@ -108,6 +109,7 @@ let modal: Modal
 onMounted(() => {
   const el = document.getElementById('BuySellProductModal')
   modal = new Modal(el!)
+	discountStore.load()
 })
 
 function openModal() {

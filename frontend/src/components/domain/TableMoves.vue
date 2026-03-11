@@ -21,10 +21,6 @@ onMounted(async () => {
   }
 })
 
-function handleAdd() {
-  emit('add')
-}
-
 const isLoading = ref(false)
 </script>
 
@@ -33,7 +29,6 @@ const isLoading = ref(false)
     <h3 class="mb-3">Historial de Movimientos</h3>
     <div class="mb-3 btn-group" role="group">
       <ButtonUpdate @click="movesStore.load" :disabled="isLoading" />
-      <ButtonAdd @click="handleAdd" />
       <ButtonExport :disabled="true" />
     </div>
 

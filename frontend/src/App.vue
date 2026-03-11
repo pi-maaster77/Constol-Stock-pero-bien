@@ -11,7 +11,7 @@ import { ref } from 'vue'
 import TableMoves from './components/domain/TableMoves.vue'
 import MovesView from './views/MovesView.vue'
 import BuySellAdjustProduct from './components/domain/BuySellAdjustProduct.vue'
-const tabActiva = ref('Productos')
+const activeTab = ref('Productos')
 </script>
 
 <template>
@@ -20,8 +20,8 @@ const tabActiva = ref('Productos')
       <li class="nav-item">
         <button
           class="nav-link"
-          :class="{ active: tabActiva === 'Productos' }"
-          @click="tabActiva = 'Productos'"
+          :class="{ active: activeTab === 'products' }"
+          @click="activeTab = 'products'"
           type="button"
         >
           <i class="bi bi-table me-2"></i>Productos
@@ -30,18 +30,48 @@ const tabActiva = ref('Productos')
       <li class="nav-item">
         <button
           class="nav-link"
-          :class="{ active: tabActiva === 'tags' }"
-          @click="tabActiva = 'tags'"
+          :class="{ active: activeTab === 'moves' }"
+          @click="activeTab = 'moves'"
           type="button"
         >
           <i class="bi bi-arrow-left-right me-2"></i>Entradas/Salidas
         </button>
       </li>
-      <li class="nav-item">
+			<li class="nav-item">
+				<button
+				class="nav-link"
+				:class="{active: activeTab === 'buy'}"
+				@click="activeTab = 'buy'"
+				type="button"
+				>
+					<i class="bi bi-bag me-2"></i>Comprar
+				</button>
+			</li>
+			<li class="nav-item">
+				<button
+				class="nav-link"
+				:class="{active: activeTab === 'sell'}"
+				@click="activeTab = 'sell'"
+				type="button"
+				>
+					<i class="bi bi-basket me-2"></i>Vender
+				</button>
+			</li>
+			<li class="nav-item">
+				<button
+				class="nav-link"
+				:class="{active: activeTab === 'audit'}"
+				@click="activeTab = 'audit'"
+				type="button"
+				>
+					<i class="bi bi-archive me-2"></i>Auditar
+				</button>
+			</li>
+			<li class="nav-item">
         <button
           class="nav-link"
-          :class="{ active: tabActiva === 'pruebas' }"
-          @click="tabActiva = 'pruebas'"
+          :class="{ active: activeTab === 'tests' }"
+          @click="activeTab = 'tests'"
           type="button"
         >
           <i class="bi bi-flask me-2"></i>Pruebas
@@ -50,15 +80,17 @@ const tabActiva = ref('Productos')
     </ul>
 
     <div class="tab-content border-start border-end border-bottom p-4 shadow-sm">
-      <div v-if="tabActiva === 'Productos'" class="tab-pane fade show active">
+      <div v-if="activeTab === 'products'" class="tab-pane fade show active">
         <ProductsView />
       </div>
 
-      <div v-if="tabActiva === 'tags'" class="tab-pane fade show active">
+      <div v-if="activeTab === 'moves'" class="tab-pane fade show active">
         <MovesView />
       </div>
-      <div v-if="tabActiva === 'pruebas'">
-        <BuySellAdjustProduct :mode="'sell'" :min="0" :max="100" />
+			<div v-if="activeTab === ''" class="tab-pane fade show active">
+        <MovesView />
+      </div>
+      <div v-if="activeTab === 'pruebas'">
       </div>
     </div>
   </div>

@@ -25,16 +25,16 @@ export const getDiscountByID = async (id: number): Promise<DiscountReturn> => {
   return response.data
 }
 
-export const createDiscount = async (product: DiscountCreate): Promise<DiscountReturn> => {
-  const response = await axios.post(`${apiUrl}${paths.discount}`, product)
+export const createDiscount = async (discount: DiscountCreate): Promise<DiscountReturn> => {
+  const response = await axios.post(`${apiUrl}${paths.discount}`, discount)
   return response.data
 }
 
 export const updateDiscount = async (
   id: number,
-  product: DiscountUpdate,
+  discount: DiscountUpdate,
 ): Promise<DiscountReturn> => {
-  const response = await axios.patch(`${apiUrl}${paths.discountByID(id)}`, product)
+  const response = await axios.patch(`${apiUrl}${paths.discountByID(id)}`, discount)
   return response.data
 }
 
