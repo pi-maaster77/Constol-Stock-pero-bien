@@ -47,7 +47,7 @@
               <option value="WAVG">WAVG</option>
             </select>
           </div>
-          <NumberInput mode="float" v-model="price" class="mb-3">
+          <NumberInput mode="float" v-model="priceBridge" class="mb-3">
             <template #label><label class="form-label">Precio de venta</label></template>
           </NumberInput>
           <div class="form-check mb-3">
@@ -110,6 +110,15 @@ const productName = ref(props.product?.name || '')
 const productUnit = ref(props.product?.unit_id || null)
 const priceFormula = ref(props.product?.price_formula || undefined)
 const price = ref(props.product?.public_price || 0)
+
+// Creamos un puente para que el componente reciba string y devuelva string,
+// pero guarde un número en la variable real.
+const priceBridge = computed({
+  get: () => price.value.toString(),
+  set: (val) => {
+    price.value = parseFloat(val) || 0
+  },
+})
 const expires = ref(props.product?.expires || false)
 
 const unitsStore = useUnitsStore()

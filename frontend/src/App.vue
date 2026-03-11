@@ -10,6 +10,7 @@ import ProductsView from './views/ProductsView.vue'
 import { ref } from 'vue'
 import TableMoves from './components/domain/TableMoves.vue'
 import MovesView from './views/MovesView.vue'
+import BuySellAdjustProduct from './components/domain/BuySellAdjustProduct.vue'
 const tabActiva = ref('Productos')
 </script>
 
@@ -33,7 +34,17 @@ const tabActiva = ref('Productos')
           @click="tabActiva = 'tags'"
           type="button"
         >
-          <i class="bi bi-arrow-left-right"></i> Entradas/Salidas
+          <i class="bi bi-arrow-left-right me-2"></i>Entradas/Salidas
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="nav-link"
+          :class="{ active: tabActiva === 'pruebas' }"
+          @click="tabActiva = 'pruebas'"
+          type="button"
+        >
+          <i class="bi bi-flask me-2"></i>Pruebas
         </button>
       </li>
     </ul>
@@ -45,6 +56,9 @@ const tabActiva = ref('Productos')
 
       <div v-if="tabActiva === 'tags'" class="tab-pane fade show active">
         <MovesView />
+      </div>
+      <div v-if="tabActiva === 'pruebas'">
+        <BuySellAdjustProduct :mode="'sell'" :min="0" :max="100" />
       </div>
     </div>
   </div>

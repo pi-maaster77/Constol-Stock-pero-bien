@@ -1,17 +1,16 @@
 <!-- frontend/src/components/ui/Inputs/NumberInputWithButtons.vue -->
 
 <template>
-  <span class="input-group">
-    <NumberInput :modelValue="modelValue" @update:modelValue="change">
-      <template #label v-if="$slots.label">
-        <slot name="label"></slot>
-      </template>
-    </NumberInput>
-    <div class="btn-group" role="group">
+  <div class="input-wrapper">
+    <div class="input-label" v-if="$slots.label">
+      <slot name="label"></slot>
+    </div>
+    <span class="input-group">
+      <NumberInput :modelValue="modelValue" @update:modelValue="change" />
       <ButtonAdd @click="increment" />
       <ButtonDecrement @click="decrement" />
-    </div>
-  </span>
+    </span>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -20,7 +19,7 @@ import ButtonAdd from '../Buttons/ButtonAdd.vue'
 import NumberInput from './NumberInput.vue'
 
 defineProps<{
-  modelValue: number
+  modelValue: string | null
   mode?: 'int' | 'float'
 }>()
 
@@ -38,7 +37,7 @@ function decrement() {
 }
 
 // 2. El evento que viene de NumberInput ya es el valor, no el objeto Event
-function change(value: string | number) {
+function change(value: string | null) {
   emit('update:modelValue', Number(value))
 }
 </script>

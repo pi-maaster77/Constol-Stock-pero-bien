@@ -1,12 +1,12 @@
 <!-- frontend/src/components/ui/Inputs/NumberInput.vue -->
 
 <template>
-  <div class="input-wrapper">
+  <div class="input-wrapper" v-if="$slots.label">
     <div class="input-label" v-if="$slots.label">
       <slot name="label"></slot>
     </div>
     <input
-      type="number"
+      :type="props.mode === 'barcode' ? 'text' : 'number'"
       :value="modelValue"
       :step="mode === 'float' ? 'any' : 1"
       @input="handleInput"
@@ -14,12 +14,22 @@
       class="form-control"
     />
   </div>
+  <input
+    v-else
+    :type="props.mode === 'barcode' ? 'text' : 'number'"
+    :value="modelValue"
+    :step="mode === 'float' ? 'any' : 1"
+    @input="handleInput"
+    @blur="handleBlur"
+    class="form-control"
+  />
 </template>
 
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    modelValue: number | string
+    // Aceptamos ambos tipos para que no de error en CreateEditProduct
+    modelValue: string | number | null
     mode?: 'int' | 'float' | 'barcode'
   }>(),
   {
@@ -28,67 +38,55 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: number): void
+  (e: 'update:modelValue', value: string | null): void
 }>()
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
   let value = target.value
 
+  if (props.mode === 'barcode') {
+    // IMPORTANTE: En barcode tratamos TODO como string puro
+    value = value.replace(/[^0-9]/g, '')
+    if (value.length > 20) value = value.slice(0, 20)
+
+    target.value = value
+    emit('update:modelValue', value) // Emitimos el string tal cual (con ceros)
+    return
+  }
+
+  // Lógica para números (int / float)
   if (props.mode === 'int') {
     value = value.replace(/[^0-9-]/g, '')
-    value = value.replace(/(?!^)-/g, '') // solo un - al inicio
+    value = value.replace(/(?!^)-/g, '')
   } else if (props.mode === 'float') {
     value = value.replace(/[^0-9.-]/g, '')
-    value = value.replace(/(?!^)-/g, '') // solo un -
-    value = value.replace(/(\..*)\./g, '$1') // solo un punto
-  } else if (props.mode === 'barcode') {
-    value = value.replace(/[^0-9]/g, '')
-    // Provablemente tenga que hacer que se configure de manera externa el largo del código de barras, pero por ahora lo dejo fijo
-    value.length > 20 && (value = value.slice(8, 20))
+    value = value.replace(/(?!^)-/g, '')
+    value = value.replace(/(\..*)\./g, '$1')
   }
 
   target.value = value
 
-  const num = Number(value)
-  if (!isNaN(num)) {
-    emit('update:modelValue', props.mode === 'int' ? Math.trunc(num) : num)
-  }
+  // Solo convertimos a Number para validar que es un número válido,
+  // pero si el usuario está escribiendo (ej: "1."), no emitimos el Number(value)
+  // porque "1." se convertiría en "1", impidiendo escribir decimales.
+  emit('update:modelValue', value)
 }
 
 const handleBlur = (event: Event) => {
   const target = event.target as HTMLInputElement
   let value = target.value
 
-  if (props.mode === 'int') {
-    value = value.replace(/[^0-9-]/g, '')
-    value = value.replace(/(?!^)-/g, '') // solo un - al inicio
-  } else {
-    value = value.replace(/[^0-9.-]/g, '')
-    value = value.replace(/(?!^)-/g, '') // solo un -
-    value = value.replace(/(\..*)\./g, '$1') // solo un punto
-  }
-
-  target.value = value
+  if (props.mode === 'barcode') return // No formatear barcodes al salir
 
   const num = Number(value)
-  if (!isNaN(num)) {
-    emit('update:modelValue', props.mode === 'int' ? Math.trunc(num) : num)
+  if (isNaN(num)) {
+    emit('update:modelValue', '0')
   } else {
-    emit('update:modelValue', 0)
+    // Aquí sí formateamos para limpiar cosas como "00123" en modo precio
+    const finalValue = props.mode === 'int' ? Math.trunc(num) : num
+    emit('update:modelValue', finalValue.toString())
   }
-}
-
-function normalize(value: string | number): number {
-  let num = typeof value === 'string' ? Number(value) : value
-
-  if (isNaN(num)) return 0
-
-  if (props.mode === 'int') {
-    return Math.trunc(num)
-  }
-
-  return num
 }
 </script>
 

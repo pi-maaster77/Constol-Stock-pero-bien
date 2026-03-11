@@ -13,6 +13,7 @@ type ProductUpdate = components['schemas']['ProductPatch']
 const paths = {
   products: '/product/',
   productByID: (id: number) => `/product/${id}`,
+  productByBC: (bc: string) => `/product/bc/${bc}`,
 }
 
 export const getProducts = async (): Promise<ProductReturn[]> => {
@@ -22,6 +23,11 @@ export const getProducts = async (): Promise<ProductReturn[]> => {
 
 export const getProductByID = async (id: number): Promise<ProductReturn> => {
   const response = await axios.get(`${apiUrl}${paths.productByID(id)}`)
+  return response.data
+}
+
+export const getProductByBC = async (bc: string): Promise<ProductReturn> => {
+  const response = await axios.get(`${apiUrl}${paths.productByBC(bc)}`)
   return response.data
 }
 

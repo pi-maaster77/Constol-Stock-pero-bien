@@ -5,1128 +5,1128 @@
  * Do not make direct changes to the file.
  */
 
-import type { ISODateString } from "./ISODatingFormat";
+import type { ISODateString } from './ISODatingFormat'
 
 export interface paths {
-    "/product/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Products */
-        get: operations["read_products_product__get"];
-        put?: never;
-        /** Create Product */
-        post: operations["create_product_product__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/product/{id_product}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Product */
-        get: operations["read_product_product__id_product__get"];
-        put?: never;
-        post?: never;
-        /** Delete Product */
-        delete: operations["delete_product_product__id_product__delete"];
-        options?: never;
-        head?: never;
-        /** Patch Product */
-        patch: operations["patch_product_product__id_product__patch"];
-        trace?: never;
-    };
-    "/product/bc/{bc_product}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Product By Bc */
-        get: operations["read_product_by_bc_product_bc__bc_product__get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/discount_bulk/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Discount Bulks */
-        get: operations["read_discount_bulks_discount_bulk__get"];
-        put?: never;
-        /** Create Discount Bulk */
-        post: operations["create_discount_bulk_discount_bulk__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/discount_bulk/{discount_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Discount Bulk */
-        get: operations["read_discount_bulk_discount_bulk__discount_id__get"];
-        /** Update Discount Bulk */
-        put: operations["update_discount_bulk_discount_bulk__discount_id__put"];
-        post?: never;
-        /** Delete Discount Bulk */
-        delete: operations["delete_discount_bulk_discount_bulk__discount_id__delete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/moves/in": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Products In */
-        post: operations["products_in_moves_in_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/moves/out": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Products Out */
-        post: operations["products_out_moves_out_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/moves/adjust": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Products Adjust */
-        post: operations["products_adjust_moves_adjust_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/moves/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Moves */
-        get: operations["read_moves_moves__get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/unit/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Units */
-        get: operations["read_units_unit__get"];
-        put?: never;
-        /** Create Unit */
-        post: operations["create_unit_unit__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/unit/{id_unit}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Unit */
-        get: operations["read_unit_unit__id_unit__get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /** Patch Unit */
-        patch: operations["patch_unit_unit__id_unit__patch"];
-        trace?: never;
-    };
-    "/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Read Root */
-        get: operations["read_root__get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
+  '/product/': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Products */
+    get: operations['read_products_product__get']
+    put?: never
+    /** Create Product */
+    post: operations['create_product_product__post']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/product/{id_product}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Product */
+    get: operations['read_product_product__id_product__get']
+    put?: never
+    post?: never
+    /** Delete Product */
+    delete: operations['delete_product_product__id_product__delete']
+    options?: never
+    head?: never
+    /** Patch Product */
+    patch: operations['patch_product_product__id_product__patch']
+    trace?: never
+  }
+  '/product/bc/{bc_product}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Product By Bc */
+    get: operations['read_product_by_bc_product_bc__bc_product__get']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/discount_bulk/': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Discount Bulks */
+    get: operations['read_discount_bulks_discount_bulk__get']
+    put?: never
+    /** Create Discount Bulk */
+    post: operations['create_discount_bulk_discount_bulk__post']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/discount_bulk/{discount_id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Discount Bulk */
+    get: operations['read_discount_bulk_discount_bulk__discount_id__get']
+    /** Update Discount Bulk */
+    put: operations['update_discount_bulk_discount_bulk__discount_id__put']
+    post?: never
+    /** Delete Discount Bulk */
+    delete: operations['delete_discount_bulk_discount_bulk__discount_id__delete']
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/moves/in': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Products In */
+    post: operations['products_in_moves_in_post']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/moves/out': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Products Out */
+    post: operations['products_out_moves_out_post']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/moves/adjust': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Products Adjust */
+    post: operations['products_adjust_moves_adjust_post']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/moves/': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Moves */
+    get: operations['read_moves_moves__get']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/unit/': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Units */
+    get: operations['read_units_unit__get']
+    put?: never
+    /** Create Unit */
+    post: operations['create_unit_unit__post']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/unit/{id_unit}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Unit */
+    get: operations['read_unit_unit__id_unit__get']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    /** Patch Unit */
+    patch: operations['patch_unit_unit__id_unit__patch']
+    trace?: never
+  }
+  '/': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Read Root */
+    get: operations['read_root__get']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
 }
-export type webhooks = Record<string, never>;
+export type webhooks = Record<string, never>
 export interface components {
-    schemas: {
-        /** BatchCreate */
-        BatchCreate: {
-            /** Id Product */
-            id_product: number;
-            /**
-             * Received At
-             * Format: date
-             */
-            received_at: ISODateString;
-            /** Expires At */
-            expires_at: ISODateString | null;
-            /** Ammount */
-            ammount: number;
-            /** Cost Price */
-            cost_price: number;
-        };
-        /**
-         * DefaultUnits
-         * @enum {integer}
-         */
-        DefaultUnits: 1 | 2 | 3;
-        /** DiscountBulk */
-        DiscountBulk: {
-            /** Id Product */
-            id_product: number;
-            /** Min Ammount */
-            min_ammount: number;
-            /** Discount */
-            discount: number;
-            /** Id */
-            id: number;
-        };
-        /** DiscountBulkCreate */
-        DiscountBulkCreate: {
-            /** Id Product */
-            id_product: number;
-            /** Min Ammount */
-            min_ammount: number;
-            /** Discount */
-            discount: number;
-        };
-        /** DiscountBulkUpdate */
-        DiscountBulkUpdate: {
-            /** Min Ammount */
-            min_ammount?: number | null;
-            /** Discount */
-            discount?: number | null;
-        };
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /** MoveAdjustRead */
-        MoveAdjustRead: {
-            /** Id */
-            id: number;
-            /**
-             * Date
-             * Format: date
-             */
-            date: ISODateString;
-            /** Details */
-            details: components["schemas"]["MoveDetailRead"][];
-        };
-        /** MoveDetailRead */
-        MoveDetailRead: {
-            /** Id Product */
-            id_product: number;
-            /** Bc Product */
-            bc_product: string;
-            /** Product Name */
-            product_name: string;
-            unit: components["schemas"]["DefaultUnits"];
-            /** Ammount */
-            ammount: number;
-            /** Unit Price */
-            unit_price: number;
-            /** Total Price */
-            total_price: number;
-        };
-        /** MoveInRead */
-        MoveInRead: {
-            /** Id */
-            id: number;
-            /**
-             * Date
-             * Format: date
-             */
-            date: ISODateString;
-            /** Details */
-            details: components["schemas"]["MoveDetailRead"][];
-        };
-        /** MoveOutRead */
-        MoveOutRead: {
-            /** Id */
-            id: number;
-            /**
-             * Date
-             * Format: date
-             */
-            date: ISODateString;
-            /** Total */
-            total: number;
-            /** Details */
-            details: components["schemas"]["TicketLine"][];
-        };
-        /** MoveRead */
-        MoveRead: {
-            /** Id */
-            id: number;
-            /**
-             * Date
-             * Format: date
-             */
-            date: ISODateString;
-            /** Type */
-            type: string;
-            /** Details */
-            details: components["schemas"]["MoveDetailRead"][];
-        };
-        /** MovesAdjust */
-        MovesAdjust: {
-            /** Reason */
-            reason?: string | null;
-            /**
-             * Date
-             * Format: date
-             */
-            date: ISODateString;
-            /** Details */
-            details: components["schemas"]["BatchCreate"][];
-        };
-        /** MovesIn */
-        MovesIn: {
-            /**
-             * Date
-             * Format: date
-             */
-            date: ISODateString;
-            /** Details */
-            details: components["schemas"]["BatchCreate"][];
-        };
-        /** MovesOut */
-        MovesOut: {
-            /**
-             * Date
-             * Format: date
-             */
-            date: ISODateString;
-            /** Details */
-            details: components["schemas"]["ProductSelling"][];
-        };
-        /**
-         * PriceFormula
-         * @enum {string}
-         */
-        PriceFormula: "FIFO" | "LIFO" | "WAVG";
-        /** ProductCreate */
-        ProductCreate: {
-            /** Bc */
-            bc: string;
-            /** Name */
-            name: string;
-            price_formula: components["schemas"]["PriceFormula"];
-            /** Public Price */
-            public_price: number;
-            unit_id: components["schemas"]["DefaultUnits"];
-            /** Expires */
-            expires: boolean;
-        };
-        /** ProductPatch */
-        ProductPatch: {
-            /** Bc */
-            bc?: string | null;
-            /** Name */
-            name?: string | null;
-            price_formula?: components["schemas"]["PriceFormula"] | null;
-            /** Public Price */
-            public_price?: number | null;
-            unit_id?: components["schemas"]["DefaultUnits"] | null;
-            /** Expires */
-            expires?: boolean | null;
-        };
-        /** ProductReturn */
-        ProductReturn: {
-            /** Bc */
-            bc: string;
-            /** Name */
-            name: string;
-            price_formula: components["schemas"]["PriceFormula"];
-            /** Public Price */
-            public_price: number;
-            unit_id: components["schemas"]["DefaultUnits"];
-            /** Expires */
-            expires: boolean;
-            /** Id */
-            id: number;
-            /** Ammount */
-            ammount: number;
-            /** Price Cache */
-            price_cache: number | null;
-        };
-        /** ProductSelling */
-        ProductSelling: {
-            /** Id Product */
-            id_product: number;
-            /** Ammount */
-            ammount: number;
-        };
-        /** TicketLine */
-        TicketLine: {
-            /** Id Product */
-            id_product: number;
-            /** Product Name */
-            product_name: string;
-            /** Ammount */
-            ammount: number;
-            /** Unit Price */
-            unit_price: number;
-            /** Discount */
-            discount: number;
-            /** Line Total */
-            line_total: number;
-        };
-        /** UnitCreate */
-        UnitCreate: {
-            /** Name */
-            name: string;
-            /** Abbreviation */
-            abbreviation: string;
-        };
-        /** UnitPatch */
-        UnitPatch: {
-            /** Id */
-            id: number;
-            /** Name */
-            name?: string | null;
-            /** Abbreviation */
-            abbreviation?: string | null;
-        };
-        /** UnitReturn */
-        UnitReturn: {
-            /** Name */
-            name: string;
-            /** Abbreviation */
-            abbreviation: string;
-            /** Id */
-            id: number;
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
-        };
-    };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+  schemas: {
+    /** BatchCreate */
+    BatchCreate: {
+      /** Id Product */
+      id_product: number
+      /**
+       * Received At
+       * Format: date
+       */
+      received_at: ISODateString
+      /** Expires At */
+      expires_at: ISODateString | null
+      /** Ammount */
+      ammount: number
+      /** Cost Price */
+      cost_price: number
+    }
+    /**
+     * DefaultUnits
+     * @enum {integer}
+     */
+    DefaultUnits: 1 | 2 | 3
+    /** DiscountBulk */
+    DiscountBulk: {
+      /** Id Product */
+      id_product: number
+      /** Min Ammount */
+      min_ammount: number
+      /** Discount */
+      discount: number
+      /** Id */
+      id: number
+    }
+    /** DiscountBulkCreate */
+    DiscountBulkCreate: {
+      /** Id Product */
+      id_product: number
+      /** Min Ammount */
+      min_ammount: number
+      /** Discount */
+      discount: number
+    }
+    /** DiscountBulkUpdate */
+    DiscountBulkUpdate: {
+      /** Min Ammount */
+      min_ammount?: number | null
+      /** Discount */
+      discount?: number | null
+    }
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components['schemas']['ValidationError'][]
+    }
+    /** MoveAdjustRead */
+    MoveAdjustRead: {
+      /** Id */
+      id: number
+      /**
+       * Date
+       * Format: date
+       */
+      date: ISODateString
+      /** Details */
+      details: components['schemas']['MoveDetailRead'][]
+    }
+    /** MoveDetailRead */
+    MoveDetailRead: {
+      /** Id Product */
+      id_product: number
+      /** Bc Product */
+      bc_product: string
+      /** Product Name */
+      product_name: string
+      unit: components['schemas']['DefaultUnits']
+      /** Ammount */
+      ammount: number
+      /** Unit Price */
+      unit_price: number
+      /** Total Price */
+      total_price: number
+    }
+    /** MoveInRead */
+    MoveInRead: {
+      /** Id */
+      id: number
+      /**
+       * Date
+       * Format: date
+       */
+      date: ISODateString
+      /** Details */
+      details: components['schemas']['MoveDetailRead'][]
+    }
+    /** MoveOutRead */
+    MoveOutRead: {
+      /** Id */
+      id: number
+      /**
+       * Date
+       * Format: date
+       */
+      date: ISODateString
+      /** Total */
+      total: number
+      /** Details */
+      details: components['schemas']['TicketLine'][]
+    }
+    /** MoveRead */
+    MoveRead: {
+      /** Id */
+      id: number
+      /**
+       * Date
+       * Format: date
+       */
+      date: ISODateString
+      /** Type */
+      type: string
+      /** Details */
+      details: components['schemas']['MoveDetailRead'][]
+    }
+    /** MovesAdjust */
+    MovesAdjust: {
+      /** Reason */
+      reason?: string | null
+      /**
+       * Date
+       * Format: date
+       */
+      date: ISODateString
+      /** Details */
+      details: components['schemas']['BatchCreate'][]
+    }
+    /** MovesIn */
+    MovesIn: {
+      /**
+       * Date
+       * Format: date
+       */
+      date: ISODateString
+      /** Details */
+      details: components['schemas']['BatchCreate'][]
+    }
+    /** MovesOut */
+    MovesOut: {
+      /**
+       * Date
+       * Format: date
+       */
+      date: ISODateString
+      /** Details */
+      details: components['schemas']['ProductSelling'][]
+    }
+    /**
+     * PriceFormula
+     * @enum {string}
+     */
+    PriceFormula: 'FIFO' | 'LIFO' | 'WAVG'
+    /** ProductCreate */
+    ProductCreate: {
+      /** Bc */
+      bc: string
+      /** Name */
+      name: string
+      price_formula: components['schemas']['PriceFormula']
+      /** Public Price */
+      public_price: number
+      unit_id: components['schemas']['DefaultUnits']
+      /** Expires */
+      expires: boolean
+    }
+    /** ProductPatch */
+    ProductPatch: {
+      /** Bc */
+      bc?: string | null
+      /** Name */
+      name?: string | null
+      price_formula?: components['schemas']['PriceFormula'] | null
+      /** Public Price */
+      public_price?: number | null
+      unit_id?: components['schemas']['DefaultUnits'] | null
+      /** Expires */
+      expires?: boolean | null
+    }
+    /** ProductReturn */
+    ProductReturn: {
+      /** Bc */
+      bc: string
+      /** Name */
+      name: string
+      price_formula: components['schemas']['PriceFormula']
+      /** Public Price */
+      public_price: number
+      unit_id: components['schemas']['DefaultUnits']
+      /** Expires */
+      expires: boolean
+      /** Id */
+      id: number
+      /** Ammount */
+      ammount: number
+      /** Price Cache */
+      price_cache: number | null
+    }
+    /** ProductSelling */
+    ProductSelling: {
+      /** Id Product */
+      id_product: number
+      /** Ammount */
+      ammount: number
+    }
+    /** TicketLine */
+    TicketLine: {
+      /** Id Product */
+      id_product: number
+      /** Product Name */
+      product_name: string
+      /** Ammount */
+      ammount: number
+      /** Unit Price */
+      unit_price: number
+      /** Discount */
+      discount: number
+      /** Line Total */
+      line_total: number
+    }
+    /** UnitCreate */
+    UnitCreate: {
+      /** Name */
+      name: string
+      /** Abbreviation */
+      abbreviation: string
+    }
+    /** UnitPatch */
+    UnitPatch: {
+      /** Id */
+      id: number
+      /** Name */
+      name?: string | null
+      /** Abbreviation */
+      abbreviation?: string | null
+    }
+    /** UnitReturn */
+    UnitReturn: {
+      /** Name */
+      name: string
+      /** Abbreviation */
+      abbreviation: string
+      /** Id */
+      id: number
+    }
+    /** ValidationError */
+    ValidationError: {
+      /** Location */
+      loc: (string | number)[]
+      /** Message */
+      msg: string
+      /** Error Type */
+      type: string
+    }
+  }
+  responses: never
+  parameters: never
+  requestBodies: never
+  headers: never
+  pathItems: never
 }
-export type $defs = Record<string, never>;
+export type $defs = Record<string, never>
 export interface operations {
-    read_products_product__get: {
-        parameters: {
-            query?: {
-                skip?: number;
-                limit?: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ProductReturn"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    create_product_product__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ProductCreate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ProductReturn"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    read_product_product__id_product__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id_product: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ProductReturn"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    delete_product_product__id_product__delete: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id_product: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ProductReturn"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    patch_product_product__id_product__patch: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id_product: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ProductPatch"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ProductReturn"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    read_product_by_bc_product_bc__bc_product__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                bc_product: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ProductReturn"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    read_discount_bulks_discount_bulk__get: {
-        parameters: {
-            query?: {
-                skip?: number;
-                limit?: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DiscountBulk"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    create_discount_bulk_discount_bulk__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["DiscountBulkCreate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DiscountBulk"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    read_discount_bulk_discount_bulk__discount_id__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                discount_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DiscountBulk"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    update_discount_bulk_discount_bulk__discount_id__put: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                discount_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["DiscountBulkUpdate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DiscountBulk"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    delete_discount_bulk_discount_bulk__discount_id__delete: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                discount_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DiscountBulk"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    products_in_moves_in_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["MovesIn"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MoveInRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    products_out_moves_out_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["MovesOut"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MoveOutRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    products_adjust_moves_adjust_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["MovesAdjust"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MoveAdjustRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    read_moves_moves__get: {
-        parameters: {
-            query?: {
-                skip?: number;
-                limit?: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MoveRead"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    read_units_unit__get: {
-        parameters: {
-            query?: {
-                skip?: number;
-                limit?: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UnitReturn"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    create_unit_unit__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["UnitCreate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UnitReturn"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    read_unit_unit__id_unit__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id_unit: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UnitReturn"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    patch_unit_unit__id_unit__patch: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id_unit: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["UnitPatch"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UnitReturn"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    read_root__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-        };
-    };
+  read_products_product__get: {
+    parameters: {
+      query?: {
+        skip?: number
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ProductReturn'][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  create_product_product__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ProductCreate']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ProductReturn']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  read_product_product__id_product__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        id_product: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ProductReturn']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  delete_product_product__id_product__delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        id_product: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ProductReturn']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  patch_product_product__id_product__patch: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        id_product: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ProductPatch']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ProductReturn']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  read_product_by_bc_product_bc__bc_product__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        bc_product: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ProductReturn']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  read_discount_bulks_discount_bulk__get: {
+    parameters: {
+      query?: {
+        skip?: number
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DiscountBulk'][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  create_discount_bulk_discount_bulk__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['DiscountBulkCreate']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DiscountBulk']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  read_discount_bulk_discount_bulk__discount_id__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        discount_id: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DiscountBulk']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  update_discount_bulk_discount_bulk__discount_id__put: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        discount_id: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['DiscountBulkUpdate']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DiscountBulk']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  delete_discount_bulk_discount_bulk__discount_id__delete: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        discount_id: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DiscountBulk']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  products_in_moves_in_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['MovesIn']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['MoveInRead']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  products_out_moves_out_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['MovesOut']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['MoveOutRead']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  products_adjust_moves_adjust_post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['MovesAdjust']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['MoveAdjustRead']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  read_moves_moves__get: {
+    parameters: {
+      query?: {
+        skip?: number
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['MoveRead'][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  read_units_unit__get: {
+    parameters: {
+      query?: {
+        skip?: number
+        limit?: number
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['UnitReturn'][]
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  create_unit_unit__post: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UnitCreate']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['UnitReturn']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  read_unit_unit__id_unit__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        id_unit: number
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['UnitReturn']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  patch_unit_unit__id_unit__patch: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        id_unit: number
+      }
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UnitPatch']
+      }
+    }
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['UnitReturn']
+        }
+      }
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['HTTPValidationError']
+        }
+      }
+    }
+  }
+  read_root__get: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': unknown
+        }
+      }
+    }
+  }
 }

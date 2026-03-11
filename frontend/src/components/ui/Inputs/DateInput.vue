@@ -26,10 +26,10 @@ function blur(event: Event) {
 </script>
 
 <template>
-  <div class="mb-3">
-    <label for="moveDate" class="form-label text-secondary small fw-bold"
-      >Fecha del Movimiento</label
-    >
+  <div class="input-wrapper">
+    <div class="input-label" v-if="$slots.label">
+      <slot name="label"></slot>
+    </div>
     <input
       type="date"
       id="moveDate"
