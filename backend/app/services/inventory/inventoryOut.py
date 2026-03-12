@@ -96,10 +96,6 @@ def register_out(self:"InventoryService", products_out: schemas.MovesOut):
 
         self.db.add(detail)
 
-    
-
-
-
     try:
         self.db.commit()    
         self.db.refresh(move)
@@ -119,7 +115,7 @@ def register_out(self:"InventoryService", products_out: schemas.MovesOut):
                 product_name=detail.product_name,
                 unit_price=detail.unit_price,
                 discount=detail.discount_percent,
-                line_total=detail.total
+                line_total=detail.ammount * detail.unit_price
             ) for detail in move.details
         ]
     )
