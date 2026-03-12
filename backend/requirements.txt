@@ -1,5 +1,6 @@
 fastapi
 uvicorn
+gunicorn
 dotenv
 sqlalchemy
 psycopg2-binary
