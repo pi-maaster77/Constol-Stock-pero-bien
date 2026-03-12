@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 # TODO: Cambiar los ValueError por una excepcion personalizada
 
-def register_adjust(self: InventoryService, products_adjust: schemas.MovesAdjust):
+def register_adjust(self: "InventoryService", products_adjust: schemas.MovesAdjust):
 
     try:
         move = Move(

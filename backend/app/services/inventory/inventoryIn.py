@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 # TODO: Cambiar los ValueError por una excepcion personalizada
 
-def register_in(self:InventoryService, products_in: schemas.MovesIn):
+def register_in(self:"InventoryService", products_in: schemas.MovesIn):
     try:
         move = Move(date=products_in.date, type="in")
         self.db.add(move)

@@ -1,3 +1,5 @@
+# backend/app/services/inventory/inventoryOut.py
+
 # backend/app/services/inventory/out.py
 
 from typing import TYPE_CHECKING
@@ -18,7 +20,7 @@ from app.schemas.product.move import move as schemas
 
 # TODO: Cambiar los ValueError por una excepcion personalizada
 
-def register_out(self:InventoryService, products_out: schemas.MovesOut):
+def register_out(self:"InventoryService", products_out: schemas.MovesOut):
     
     move = Move(date=products_out.date, type="out")
     self.db.add(move)
