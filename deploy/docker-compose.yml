@@ -1,0 +1,93 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/docker/nginx/conf.d:/etc/nginx/conf.d:ro,z
+      - /var/lib/docker/nginx/certs:/etc/nginx/certs:ro,z
+    depends_on:
+      - cde
+      - pgadmin
+    networks:
+      - cde
+      - dns_net
+
+  apicde:
+    build:
+      context: ../backend
+    container_name: apicde
+    environment:
+      DATABASE_URL: postgresql://cde:cde@postgres:5432/cde
+      CLIENT_URL: https://cde.xyz
+    depends_on:
+      - postgres
+    networks:
+      - cde
+
+  cde:
+    build:
+      context: ../frontend
+    container_name: cde
+    networks:
+      - cde
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_DB: cde
+      POSTGRES_USER: cde
+      POSTGRES_PASSWORD: cde
+    volumes:
+      - postgres_data:/var/lib/postgresql/18/main
+    networks:
+      - cde
+    
+  
+  pihole:
+    container_name: pihole
+    image: pihole/pihole
+    networks:
+      - dns_net
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    restart: unless-stopped
+    environment:
+      # Set the appropriate timezone for your location from
+      # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones, e.g:
+      TZ: 'America/BuenosAires'
+      # Set a password to access the web interface. Not setting one will result in a random password being assigned
+      FTLCONF_webserver_api_password: 'sdundv2009'
+      FTLCONF_dns_listeningMode: "all"
+    volumes:
+      - /etc/docker/pihole:/etc/pihole,z
+      - /etc/docker/dnsmasq.d:/etc/dnsmasq.d,z
+    dns:
+      - 8.8.8.8
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@cde.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
+    networks:
+      - cde
+
+volumes:
+  postgres_data:
+
+networks:
+  cde:
+    driver: bridge
+  dns_net:
+    driver: bridge
