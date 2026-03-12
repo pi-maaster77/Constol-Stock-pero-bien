@@ -8,7 +8,6 @@
 <script setup lang="ts">
 import BuySellAdjustProduct from '@/components/domain/BuySellAdjustProduct.vue'
 import TableBuy from '@/components/domain/TableBuy.vue'
-import { useAuditStore } from '@/stores/audit'
 import { useBuyStore } from '@/stores/buy'
 import { ref } from 'vue'
 

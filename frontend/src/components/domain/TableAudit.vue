@@ -77,7 +77,7 @@ function handleDelete() {
 
 <template>
   <div class="container mt-4">
-    <h3 class="mb-3">Auditar Producto</h3>
+    <h3 class="mb-3">Auditar Productos</h3>
     <div class="mb-3 btn-group" role="group">
       <ButtonAdd @click="handleAdd" />
       <ButtonEdit @click="handleEdit" :disabled="disabled" />

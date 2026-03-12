@@ -52,7 +52,7 @@ def products_adjust(products_adjust: schemas.MovesAdjust, db: Session = Depends(
         raise
 
 @router.get("/", response_model=List[schemas.MoveRead])
-def read_moves(skip: int = 0, limit: int = 100, db:
-    Session = Depends(get_db)):
-    moves = db.query(Move).all()
+def read_moves(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    # Usamos .order_by(Move.id.desc()) antes de ejecutar la consulta
+    moves = db.query(Move).order_by(Move.id.desc()).offset(skip).limit(limit).all()
     return moves
