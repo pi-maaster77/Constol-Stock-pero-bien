@@ -20,7 +20,7 @@ const moveStyles: Record<string, { class: string; label: string; icon: string }>
     label: 'SALIDA',
     icon: 'bi-arrow-up-right-circle',
   },
-  adjustment: {
+  adjust: {
     class: 'bg-warning-subtle text-warning-emphasis border-warning',
     label: 'AJUSTE',
     icon: 'bi-sliders',
@@ -28,7 +28,7 @@ const moveStyles: Record<string, { class: string; label: string; icon: string }>
 }
 
 const currentStyle = moveStyles[props.move.type] || {
-  class: 'bg-light',
+  class: 'bg',
   label: props.move.type,
   icon: 'bi-info-circle',
 }

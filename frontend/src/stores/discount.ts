@@ -7,100 +7,100 @@ import { useNotificationsStore } from './notifications'
 import type { Discount, DiscountUpdate } from '@/types/discounts'
 
 export const useDiscountsStore = defineStore('discounts', () => {
-	const discounts = ref<Discount[]>([])
-	const discountsCount = computed(() => discounts.value.length)
+  const discounts = ref<Discount[]>([])
+  const discountsCount = computed(() => discounts.value.length)
 
-	function isAxiosError(error: unknown): error is {
-		response?: { data?: { message?: string } }
-		message?: string
-	} {
-		return typeof error === 'object' && error !== null
-	}
+  function isAxiosError(error: unknown): error is {
+    response?: { data?: { message?: string } }
+    message?: string
+  } {
+    return typeof error === 'object' && error !== null
+  }
 
-	async function optimistic(fn: Function, request: Function) {
-		const backup = [...discounts.value]
-		const notify = useNotificationsStore()
+  async function optimistic(fn: Function, request: Function) {
+    const backup = [...discounts.value]
+    const notify = useNotificationsStore()
 
-		try {
-			fn()
-			await request()
-		} catch (e: unknown) {
-			discounts.value.splice(0, discounts.value.length, ...backup)
-			console.error(e)
+    try {
+      fn()
+      await request()
+    } catch (e: unknown) {
+      discounts.value.splice(0, discounts.value.length, ...backup)
+      console.error(e)
 
-			let msg = 'Ocurrió un error inesperado'
+      let msg = 'Ocurrió un error inesperado'
 
-			if (isAxiosError(e)) {
-				msg = e.response?.data?.message || e.message || msg
-			}
-			notify.push('error', msg)
-		}
-	}
+      if (isAxiosError(e)) {
+        msg = e.response?.data?.message || e.message || msg
+      }
+      notify.push('error', msg)
+    }
+  }
 
-	function load() {
-		optimistic(
-			() => {},
-			async () => {
-				const res = await getDiscount()
+  function load() {
+    optimistic(
+      () => {},
+      async () => {
+        const res = await getDiscount()
 
-				const mapped: Discount[] = res
+        const mapped: Discount[] = res
 
-				discounts.value.splice(0, discounts.value.length, ...mapped)
-			},
-		)
-	}
+        discounts.value.splice(0, discounts.value.length, ...mapped)
+      },
+    )
+  }
 
-	function getDiscountByID(id: number): Discount | undefined {
-		return discounts.value.find((d) => d.id === id) as Discount | undefined
-	}
+  function getDiscountByID(id: number): Discount | undefined {
+    return discounts.value.find((d) => d.id === id) as Discount | undefined
+  }
 
-	function create(value: Omit<Discount, 'id'>) {
-		optimistic(
-			() => {
-				const tempID = Math.max(0, ...discounts.value.map((p) => p.id)) + 1
-				discounts.value.push({ id: tempID, ...value })
-			},
-			async () => {
-				const res = await createDiscount({
-					discount: value.discount,
-					id_product: value.id_product,
-					min_ammount: value.min_ammount
-				})
-				load()
-			},
-		)
-	}
+  function create(value: Omit<Discount, 'id'>) {
+    optimistic(
+      () => {
+        const tempID = Math.max(0, ...discounts.value.map((p) => p.id)) + 1
+        discounts.value.push({ id: tempID, ...value })
+      },
+      async () => {
+        const res = await createDiscount({
+          discount: value.discount,
+          id_product: value.id_product,
+          min_ammount: value.min_ammount,
+        })
+        load()
+      },
+    )
+  }
 
-	function update(id: number, value: Omit<Discount, 'id'>){
-		optimistic(
-			() => {
-				const tempID = Math.max(0, ...discounts.value.map((p) => p.id)) + 1
-				discounts.value.push({ id: tempID, ...value })
-			},
-			async () => {
-				const res = await updateDiscount(id, {
-					discount: value.discount,
-					min_ammount: value.min_ammount
-				})
-				load()
-			},
-		)
-	}
+  function update(id: number, value: Omit<Discount, 'id'>) {
+    optimistic(
+      () => {
+        const tempID = Math.max(0, ...discounts.value.map((p) => p.id)) + 1
+        discounts.value.push({ id: tempID, ...value })
+      },
+      async () => {
+        const res = await updateDiscount(id, {
+          discount: value.discount,
+          min_ammount: value.min_ammount,
+        })
+        load()
+      },
+    )
+  }
 
-	function deleteByID(id: number) {
-		optimistic(
-			() => {
-				const index = discounts.value.findIndex((p) => p.id === id)
-				if (index !== -1) {
-					discounts.value.splice(index, 1)
-				}
-			},
-			async () => {
-				await deleteDiscount(id)
-				load()
-			},
-		)
-	}
+  function deleteByID(id: number) {
+    optimistic(
+      () => {
+        const index = discounts.value.findIndex((p) => p.id === id)
+        if (index !== -1) {
+          discounts.value.splice(index, 1)
+        }
+      },
+      async () => {
+        await deleteDiscount(id)
+        load()
+      },
+    )
+  }
 
-	return { discounts, discountsCount, load, getDiscountByID, update, deleteByID}
+  return { discounts, discountsCount, load, getDiscountByID, update, deleteByID }
 })

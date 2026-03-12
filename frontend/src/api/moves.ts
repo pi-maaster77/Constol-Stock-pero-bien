@@ -3,6 +3,7 @@
 import type { components } from '@/types/api'
 import axios from 'axios'
 import config from './config.json'
+import type { MoveAdjust } from '@/types/move'
 
 const { apiUrl } = config
 
@@ -26,12 +27,12 @@ export const movesOut = async (movesOutData: MovesOut[]): Promise<MovesOut[]> =>
   return response.data
 }
 
-export const movesAdjust = async (movesAdjustData: MovesIn[]): Promise<MovesIn[]> => {
+export const movesAdjust = async (movesAdjustData: MoveAdjust[]): Promise<MoveAdjust[]> => {
   const response = await axios.post(`${apiUrl}${paths.movesAdjust}`, movesAdjustData)
   return response.data
 }
 
-export const getMoves = async (): Promise<(MovesIn | MovesOut)[]> => {
+export const getMoves = async (): Promise<(MovesIn | MovesOut | MoveAdjust)[]> => {
   const response = await axios.get(`${apiUrl}${paths.moves}`)
   console.log('movimientos:', response.data)
   return response.data

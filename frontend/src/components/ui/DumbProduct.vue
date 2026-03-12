@@ -14,19 +14,20 @@
     <td>{{ product.bc }}</td>
     <td>{{ product.name }}</td>
     <td>{{ product.public_price }}</td>
-    <td>{{ product.ammount }}</td>
-		<td v-if="expireDate">{{ expireDate }}</td>
+    <td>{{ adjustAmmount !== undefined ? adjustAmmount : product.ammount }}</td>
+    <td v-if="expireDate">{{ expireDate }}</td>
   </tr>
 </template>
 
 <script setup lang="ts">
-import type { ISODateString } from '@/types/ISODatingFormat';
+import type { ISODateString } from '@/types/ISODatingFormat'
 import type { Product } from '@/types/product'
 const props = defineProps<{
   product: Product
   productIndex?: number
   checked?: boolean
-	expireDate?: ISODateString
+  adjustAmmount?: number
+  expireDate?: ISODateString
 }>()
 
 const emit = defineEmits<{

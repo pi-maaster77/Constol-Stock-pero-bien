@@ -1,7 +1,5 @@
 <!-- frontend/src/components/domain/BuySellAdjustProduct.vue -->
 
-<!-- frontend/src/components/domain/BuySellProduct.vue -->
-
 <script setup lang="ts">
 import { getProductByBC } from '@/api/product'
 import type { Product } from '@/types/product'
@@ -13,27 +11,32 @@ import TextInput from '@/components/ui/Inputs/TextInput.vue'
 import { Modal } from 'bootstrap'
 import DateInput from '../ui/Inputs/DateInput.vue'
 import { useDiscountsStore } from '@/stores/discount'
+import type { NewMoveDetail } from '@/types/move'
+import { useAuditStore } from '@/stores/audit'
+import { ISODateString } from '@/types/ISODatingFormat'
 
+const auditStore = useAuditStore()
 const discountStore = useDiscountsStore()
 
 const props = defineProps<{
   mode: 'buy' | 'sell' | 'adjust'
+  moveDetail?: NewMoveDetail | null
 }>()
 
-const barcode = ref<string | null>(null)
-const product = ref<Product | null>(null)
+const barcode = ref<string | null>(props.moveDetail?.product.bc ?? null)
+const product = ref<Product | null>(props.moveDetail?.product ?? null)
 const isLoading = ref(false)
 const productNotFound = ref(false)
 
 // Producto a agregar a detalle
-const ammount = ref(0)
+const ammount = ref(props.moveDetail?.ammount ?? 0)
 const ammountBridge = computed({
   get: () => ammount.value.toString(),
   set: (val) => {
     ammount.value = parseFloat(val) || 0
   },
 })
-const price = ref(0)
+const price = ref(props.moveDetail?.cost_price ?? 0)
 const priceBridge = computed({
   get: () => price.value.toString(),
   set: (val) => {
@@ -41,10 +44,9 @@ const priceBridge = computed({
   },
 })
 
-
 const finalPrice = computed(() => {
   const currentAmmount = ammount.value
-  
+
   // 1. Si no hay producto, el precio es 0
   if (!product?.value) return 0
 
@@ -53,12 +55,16 @@ const finalPrice = computed(() => {
     const basePrice = product.value.public_price || 0
 
     const applicableDiscount = discountStore.discounts
-      .filter(d => d.id_product === product.value?.id && currentAmmount >= d.min_ammount)
+      .filter((d) => d.id_product === product.value?.id && currentAmmount >= d.min_ammount)
       .sort((a, b) => b.min_ammount - a.min_ammount)[0] // Tomamos el de mayor rango alcanzado
 
     if (applicableDiscount) {
       // Aplicamos el precio especial del descuento
-      return parseFloat((product.value.public_price*(1 - applicableDiscount.discount) * currentAmmount).toFixed(2))
+      return parseFloat(
+        (product.value.public_price * (1 - applicableDiscount.discount) * currentAmmount).toFixed(
+          2,
+        ),
+      )
     }
 
     // Si no hay descuento, precio normal
@@ -68,7 +74,7 @@ const finalPrice = computed(() => {
   // 3. Lógica para COMPRA o AJUSTE (Se usa el precio del input manual)
   return price.value * currentAmmount
 })
-const expirationDate = ref(new Date().toISOString().substr(0, 10)) // Formato YYYY-MM-DD
+const expirationDate = ref<string>(props.moveDetail?.expires_at?.toISOString() ?? '') // Formato YYYY-MM-DD
 
 // Watcher para buscar automáticamente cuando el barcode cambie
 watch(barcode, async (newVal) => {
@@ -109,37 +115,57 @@ let modal: Modal
 onMounted(() => {
   const el = document.getElementById('BuySellProductModal')
   modal = new Modal(el!)
-	discountStore.load()
+  discountStore.load()
 })
 
 function openModal() {
   modal.show()
 }
 
+function closeModal() {
+  modal.hide()
+}
+
 function increment() {
   ammount.value++
 }
 function decrement() {
-  if (ammount.value > 0) ammount.value--
+  if (props.mode === 'adjust') {
+    ammount.value--
+  } else if (ammount.value > 0) {
+    ammount.value--
+  }
 }
 
 function handleDetail() {
-  console.log({
-    id_product: product.value?.id,
-    recived_at: new Date().toISOString(),
-    expires_at: expirationDate.value,
+  const expiresAtDate = expirationDate.value ? new ISODateString(expirationDate.value) : null
+  console.log(product.value !== undefined && product.value !== null, {
     ammount: ammount.value,
     cost_price: price.value,
-
+    expires_at: expiresAtDate,
+    id_product: product.value?.id ?? 0,
     product: product.value,
+    received_at: new ISODateString(new Date()),
   })
-  // Aquí iría la lógica para enviar los datos al backend
-  modal.hide()
+  if (product.value !== undefined && product.value !== null) {
+    auditStore.create({
+      ammount: ammount.value,
+      cost_price: price.value,
+      expires_at: expiresAtDate,
+      id_product: product.value.id,
+      product: product.value,
+      received_at: new ISODateString(new Date()),
+    })
+  }
+  closeModal()
 }
+
+defineExpose({
+  openModal,
+})
 </script>
 
 <template>
-  <button @click="openModal">mostrar</button>
   <div
     class="modal fade"
     id="BuySellProductModal"
@@ -161,6 +187,7 @@ function handleDetail() {
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
+            @click="closeModal"
           ></button>
         </div>
 
@@ -216,11 +243,13 @@ function handleDetail() {
               <template #label><label class="form-label">Fecha de vencimiento</label></template>
             </DateInput>
           </div>
-					<div v-if="mode === 'sell'">
-						<p class="text-muted small">Precio unitario: {{ product?.public_price || 0 }}</p>
-						<p class="text-muted small">Precio subtotal: {{ (product?.public_price || 0) * ammount }}</p>
-						<p class="text-muted small">Precio total: {{ finalPrice }}</p>
-					</div>
+          <div v-if="mode === 'sell'">
+            <p class="text-muted small">Precio unitario: {{ product?.public_price || 0 }}</p>
+            <p class="text-muted small">
+              Precio subtotal: {{ (product?.public_price || 0) * ammount }}
+            </p>
+            <p class="text-muted small">Precio total: {{ finalPrice }}</p>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" @click="handleDetail">Crear</button>
           </div>

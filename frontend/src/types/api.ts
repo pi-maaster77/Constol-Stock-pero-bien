@@ -5,7 +5,7 @@
  * Do not make direct changes to the file.
  */
 
-import type { ISODateString } from './ISODatingFormat'
+import { ISODateString } from './ISODatingFormat'
 
 export interface paths {
   '/product/': {
@@ -659,7 +659,7 @@ export interface operations {
       query?: never
       header?: never
       path: {
-        bc_product: number
+        bc_product: string
       }
       cookie?: never
     }

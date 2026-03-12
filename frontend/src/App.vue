@@ -11,6 +11,8 @@ import { ref } from 'vue'
 import TableMoves from './components/domain/TableMoves.vue'
 import MovesView from './views/MovesView.vue'
 import BuySellAdjustProduct from './components/domain/BuySellAdjustProduct.vue'
+import TableAudit from './components/domain/TableAudit.vue'
+import AuditView from './views/AuditView.vue'
 const activeTab = ref('Productos')
 </script>
 
@@ -37,37 +39,37 @@ const activeTab = ref('Productos')
           <i class="bi bi-arrow-left-right me-2"></i>Entradas/Salidas
         </button>
       </li>
-			<li class="nav-item">
-				<button
-				class="nav-link"
-				:class="{active: activeTab === 'buy'}"
-				@click="activeTab = 'buy'"
-				type="button"
-				>
-					<i class="bi bi-bag me-2"></i>Comprar
-				</button>
-			</li>
-			<li class="nav-item">
-				<button
-				class="nav-link"
-				:class="{active: activeTab === 'sell'}"
-				@click="activeTab = 'sell'"
-				type="button"
-				>
-					<i class="bi bi-basket me-2"></i>Vender
-				</button>
-			</li>
-			<li class="nav-item">
-				<button
-				class="nav-link"
-				:class="{active: activeTab === 'audit'}"
-				@click="activeTab = 'audit'"
-				type="button"
-				>
-					<i class="bi bi-archive me-2"></i>Auditar
-				</button>
-			</li>
-			<li class="nav-item">
+      <li class="nav-item">
+        <button
+          class="nav-link"
+          :class="{ active: activeTab === 'buy' }"
+          @click="activeTab = 'buy'"
+          type="button"
+        >
+          <i class="bi bi-bag me-2"></i>Comprar
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="nav-link"
+          :class="{ active: activeTab === 'sell' }"
+          @click="activeTab = 'sell'"
+          type="button"
+        >
+          <i class="bi bi-basket me-2"></i>Vender
+        </button>
+      </li>
+      <li class="nav-item">
+        <button
+          class="nav-link"
+          :class="{ active: activeTab === 'audit' }"
+          @click="activeTab = 'audit'"
+          type="button"
+        >
+          <i class="bi bi-archive me-2"></i>Auditar
+        </button>
+      </li>
+      <li class="nav-item">
         <button
           class="nav-link"
           :class="{ active: activeTab === 'tests' }"
@@ -87,10 +89,12 @@ const activeTab = ref('Productos')
       <div v-if="activeTab === 'moves'" class="tab-pane fade show active">
         <MovesView />
       </div>
-			<div v-if="activeTab === ''" class="tab-pane fade show active">
+      <div v-if="activeTab === ''" class="tab-pane fade show active">
         <MovesView />
       </div>
-      <div v-if="activeTab === 'pruebas'">
+      <div v-if="activeTab === 'pruebas'"></div>
+      <div v-if="activeTab === 'audit'">
+        <AuditView />
       </div>
     </div>
   </div>

@@ -123,15 +123,13 @@ const expires = ref(props.product?.expires || false)
 
 const unitsStore = useUnitsStore()
 const productStore = useProductsStore()
-onMounted(() => {
-  unitsStore.load()
-  units.value = unitsStore.units
-  console.log('units', units.value)
-})
 
 let modal: Modal
 
 onMounted(() => {
+  unitsStore.load()
+  units.value = unitsStore.units
+  console.log('units', units.value)
   const el = document.getElementById('createEditProductModal')
   modal = new Modal(el!)
 })

@@ -9,7 +9,7 @@
       type="text"
       :value="modelValue"
       @input="update"
-			@blur="blur"
+      @blur="blur"
       class="form-control"
       :disabled="disabled"
     />
