@@ -31,7 +31,7 @@ function closeModal() {
 function handleDetail() {
   movesAdjust(
     {
-      date: (new ISODateString(new Date()).toISOString()) as unknown as ISODateString,
+      date: (new ISODateString(new Date()).toISOString()) as unknown as ISODateString, 
       details: auditStore.products.map((p) => ({
         id_product: p.id_product,
         received_at: typeof p.received_at === 'string' ? p.received_at : p.received_at.toISOString(),

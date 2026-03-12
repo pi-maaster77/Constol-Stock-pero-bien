@@ -14,14 +14,21 @@ import { useDiscountsStore } from '@/stores/discount'
 import type { NewMoveDetail } from '@/types/move'
 import { useAuditStore } from '@/stores/audit'
 import { ISODateString } from '@/types/ISODatingFormat'
+import { useBuyStore } from '@/stores/buy'
+import { useSellStore } from '@/stores/sell'
 
-const auditStore = useAuditStore()
+
 const discountStore = useDiscountsStore()
 
 const props = defineProps<{
   mode: 'buy' | 'sell' | 'adjust'
   moveDetail?: NewMoveDetail | null
 }>()
+
+const store = props.mode ==='adjust' ? useAuditStore(): 
+							props.mode === 'buy' ? useBuyStore(): 
+							props.mode === 'sell' ? useSellStore():
+							useAuditStore()
 
 const barcode = ref<string | null>(props.moveDetail?.product.bc ?? null)
 const product = ref<Product | null>(props.moveDetail?.product ?? null)
@@ -148,7 +155,7 @@ function handleDetail() {
     received_at: new ISODateString(new Date()),
   })
   if (product.value !== undefined && product.value !== null) {
-    auditStore.create({
+    store.create({
       ammount: ammount.value,
       cost_price: price.value,
       expires_at: expiresAtDate,
@@ -156,6 +163,28 @@ function handleDetail() {
       product: product.value,
       received_at: new ISODateString(new Date()),
     })
+  }
+  closeModal()
+}
+
+function handleSave() {
+  const expiresAtDate = expirationDate.value ? new ISODateString(expirationDate.value) : null
+  if (product.value !== undefined && product.value !== null && props.moveDetail) {
+    // Buscar el índice del producto en el store
+    const editIndex = store.products.findIndex(
+      (p) => p.id_product === product.value!.id && p.received_at.toISOString() === props.moveDetail!.received_at.toISOString()
+    )
+    
+    if (editIndex !== -1) {
+      store.updateByID(editIndex, {
+        ammount: ammount.value,
+        cost_price: price.value,
+        expires_at: expiresAtDate,
+        id_product: product.value.id,
+        product: product.value,
+        received_at: props.moveDetail!.received_at,
+      })
+    }
   }
   closeModal()
 }
@@ -234,7 +263,7 @@ defineExpose({
           >
             <template #label><label class="form-label">Cantidad</label></template>
           </NumberInputWithButtons>
-          <div v-if="mode === 'buy'">
+          <div v-if="mode === 'buy' || mode === 'adjust' && ammount > 0">
             <NumberInput v-model="priceBridge" :class="{ 'mb-3': true }" mode="float">
               <template #label><label class="form-label">Precio</label></template>
             </NumberInput>
@@ -251,7 +280,8 @@ defineExpose({
             <p class="text-muted small">Precio total: {{ finalPrice }}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="handleDetail">Crear</button>
+						<button type="button" class="btn btn-primary" @click="handleSave" v-if="props.moveDetail">Guardar</button>
+            <button type="button" class="btn btn-primary" @click="handleDetail" v-else>Crear</button>
           </div>
         </div>
       </div>

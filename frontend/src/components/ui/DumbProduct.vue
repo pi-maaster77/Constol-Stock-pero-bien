@@ -13,7 +13,7 @@
     </td>
     <td>{{ product.bc }}</td>
     <td>{{ product.name }}</td>
-    <td>{{ product.public_price }}</td>
+    <td>{{ price !== undefined ? price : product.public_price }}</td>
     <td>{{ adjustAmmount !== undefined ? adjustAmmount : product.ammount }}</td>
     <td v-if="expireDate">{{ expireDate }}</td>
   </tr>
@@ -28,6 +28,7 @@ const props = defineProps<{
   checked?: boolean
   adjustAmmount?: number
   expireDate?: ISODateString
+	price?: number
 }>()
 
 const emit = defineEmits<{

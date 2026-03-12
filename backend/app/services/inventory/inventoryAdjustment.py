@@ -33,24 +33,32 @@ def register_adjust(self: InventoryService, products_adjust: schemas.MovesAdjust
             if not product:
                 raise ValueError("Product not found")
 
-            if product.expires and not item.expires_at:
-                raise ValueError("This product requires expiration date")
+            # para entradas positivas verificamos expiración según corresponda
+            if item.ammount > 0:
+                if product.expires and not item.expires_at:
+                    raise ValueError("This product requires expiration date")
 
-            if not product.expires and item.expires_at:
-                raise ValueError("This product must NOT have expiration date")
+                if not product.expires and item.expires_at:
+                    raise ValueError("This product must NOT have expiration date")
 
-            # crear batch
-            batch = Batch(
-                id_product=item.id_product,
-                received_at=item.received_at,
-                expires_at=item.expires_at,
-                ammount=item.ammount,
-                cost_price=item.cost_price
-            )
+                # crear batch solo para entradas
+                batch = Batch(
+                    id_product=item.id_product,
+                    received_at=item.received_at,
+                    expires_at=item.expires_at,
+                    ammount=item.ammount,
+                    cost_price=item.cost_price
+                )
 
-            self.db.add(batch)
+                self.db.add(batch)
+            else:
+                # salidas: no se exige fecha de vencimiento y no generamos batch
+                # opcionalmente podríamos validar que expires_at sea None
+                if item.expires_at is not None:
+                    # ignorar la fecha o lanzar advertencia según política
+                    pass
 
-            # detalle del movimiento
+            # detalle del movimiento permanece siempre, con signo en ammount
             detail = MoveDetail(
                 id_move=move.id,
                 id_product=item.id_product,

@@ -2,7 +2,7 @@
 
 <template>
   <TableAudit @add="handleAdd" @edit="handleEdit" @upload="handleUpload" />
-  <BuySellAdjustProduct ref="modalAdjustRef" mode="adjust" :move-detail="moveDetail" />
+  <BuySellAdjustProduct ref="modalAdjustRef" mode="adjust" :move-detail="moveDetail"/>
   <UploadAudit ref="modalConfirmRef" />
 </template>
 
@@ -23,7 +23,7 @@ function handleAdd() {
   modalAdjustRef.value?.openModal()
 }
 
-function handleEdit(selectedIndexes: number[]) {
+function handleEdit(selectedIndexes: number[]){
   const firstIndex = selectedIndexes[0]
   if (firstIndex === undefined) return
   moveDetail.value = auditStore.products[firstIndex]

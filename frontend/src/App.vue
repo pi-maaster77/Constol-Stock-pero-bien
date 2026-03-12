@@ -13,6 +13,7 @@ import MovesView from './views/MovesView.vue'
 import BuySellAdjustProduct from './components/domain/BuySellAdjustProduct.vue'
 import TableAudit from './components/domain/TableAudit.vue'
 import AuditView from './views/AuditView.vue'
+import BuyView from './views/BuyView.vue'
 const activeTab = ref('Productos')
 </script>
 
@@ -89,13 +90,16 @@ const activeTab = ref('Productos')
       <div v-if="activeTab === 'moves'" class="tab-pane fade show active">
         <MovesView />
       </div>
-      <div v-if="activeTab === ''" class="tab-pane fade show active">
-        <MovesView />
+      <div v-if="activeTab === 'buy'">
+        <BuyView />
       </div>
-      <div v-if="activeTab === 'pruebas'"></div>
+      <div v-if="activeTab === 'sell'">
+        <AuditView />
+      </div>
       <div v-if="activeTab === 'audit'">
         <AuditView />
       </div>
-    </div>
+      <div v-if="activeTab === 'pruebas'"></div>
+		</div>
   </div>
 </template>
