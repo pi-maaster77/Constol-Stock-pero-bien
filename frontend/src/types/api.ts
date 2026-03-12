@@ -232,9 +232,9 @@ export interface components {
        * Received At
        * Format: date
        */
-      received_at: ISODateString
+      received_at: string
       /** Expires At */
-      expires_at: ISODateString | null
+      expires_at: string | null
       /** Ammount */
       ammount: number
       /** Cost Price */
@@ -285,7 +285,7 @@ export interface components {
        * Date
        * Format: date
        */
-      date: ISODateString
+      date: string
       /** Details */
       details: components['schemas']['MoveDetailRead'][]
     }
@@ -313,7 +313,7 @@ export interface components {
        * Date
        * Format: date
        */
-      date: ISODateString
+      date: string
       /** Details */
       details: components['schemas']['MoveDetailRead'][]
     }
@@ -325,7 +325,7 @@ export interface components {
        * Date
        * Format: date
        */
-      date: ISODateString
+      date: string
       /** Total */
       total: number
       /** Details */
@@ -339,7 +339,7 @@ export interface components {
        * Date
        * Format: date
        */
-      date: ISODateString
+      date: string
       /** Type */
       type: string
       /** Details */

@@ -52,11 +52,12 @@ const emit = defineEmits<{
 }>()
 
 function handleUpload() {
+	const date = new ISODateString(new Date()).toISOString()
   movesOut({
-		date: new ISODateString(new Date()).toISOString(),
+		date: date,
 		details: sellStore.products.map((p) => ({
         id_product: p.id_product,
-        received_at: typeof p.received_at === 'string' ? p.received_at : p.received_at.toISOString(),
+        received_at: p.received_at,
         ammount: p.ammount,
         cost_price: p.cost_price,
       })),

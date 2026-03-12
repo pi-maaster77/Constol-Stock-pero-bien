@@ -29,13 +29,15 @@ function closeModal() {
 }
 
 function handleDetail() {
+	const date = new ISODateString(new Date()).toISOString()
+	if(!date) return
   movesAdjust(
     {
-      date: (new ISODateString(new Date()).toISOString()) as unknown as ISODateString, 
+      date: date, 
       details: auditStore.products.map((p) => ({
         id_product: p.id_product,
-        received_at: typeof p.received_at === 'string' ? p.received_at : p.received_at.toISOString(),
-        expires_at: p.expires_at ? (typeof p.expires_at === 'string' ? p.expires_at : p.expires_at.toISOString()) : null,
+        received_at: p.received_at,
+        expires_at: p.expires_at,
         ammount: p.ammount,
         cost_price: p.cost_price,
       })),

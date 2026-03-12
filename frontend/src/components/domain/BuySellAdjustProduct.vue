@@ -81,7 +81,7 @@ const finalPrice = computed(() => {
   // 3. Lógica para COMPRA o AJUSTE (Se usa el precio del input manual)
   return price.value * currentAmmount
 })
-const expirationDate = ref<string>(props.moveDetail?.expires_at?.toISOString() ?? '') // Formato YYYY-MM-DD
+const expirationDate = ref<string>(props.moveDetail?.expires_at ?? '') // Formato YYYY-MM-DD
 
 // Watcher para buscar automáticamente cuando el barcode cambie
 watch(barcode, async (newVal) => {
@@ -150,10 +150,10 @@ function handleDetail() {
     store.create({
       ammount: ammount.value,
       cost_price: price.value,
-      expires_at: expiresAtDate,
+      expires_at: expiresAtDate?.toISOString() ?? null,
       id_product: product.value.id,
       product: product.value,
-      received_at: new ISODateString(new Date()),
+      received_at: new ISODateString(new Date()).toISOString(),
     })
   }
   closeModal()
@@ -164,14 +164,14 @@ function handleSave() {
   if (product.value !== undefined && product.value !== null && props.moveDetail) {
     // Buscar el índice del producto en el store
     const editIndex = store.products.findIndex(
-      (p) => p.id_product === product.value!.id && p.received_at.toISOString() === props.moveDetail!.received_at.toISOString()
+      (p) => p.id_product === product.value!.id && p.received_at === props.moveDetail!.received_at
     )
     
     if (editIndex !== -1) {
       store.updateByID(editIndex, {
         ammount: ammount.value,
         cost_price: price.value,
-        expires_at: expiresAtDate,
+        expires_at: expiresAtDate?.toISOString() ?? null,
         id_product: product.value.id,
         product: product.value,
         received_at: props.moveDetail!.received_at,

@@ -17,17 +17,17 @@ const paths = {
   moves: '/moves',
 }
 
-export const movesIn = async (movesInData: MovesIn[]): Promise<MovesIn[]> => {
+export const movesIn = async (movesInData: MovesIn): Promise<MovesIn> => {
   const response = await axios.post(`${apiUrl}${paths.movesIn}`, movesInData)
   return response.data
 }
 
-export const movesOut = async (movesOutData: MovesOut[]): Promise<MovesOut[]> => {
+export const movesOut = async (movesOutData: MovesOut): Promise<MovesOut> => {
   const response = await axios.post(`${apiUrl}${paths.movesOut}`, movesOutData)
   return response.data
 }
 
-export const movesAdjust = async (movesAdjustData: MoveAdjust[]): Promise<MoveAdjust[]> => {
+export const movesAdjust = async (movesAdjustData: MoveAdjust): Promise<MoveAdjust> => {
   const response = await axios.post(`${apiUrl}${paths.movesAdjust}`, movesAdjustData)
   return response.data
 }

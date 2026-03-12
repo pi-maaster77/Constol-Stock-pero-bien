@@ -54,16 +54,16 @@ const emit = defineEmits<{
 
 function handleUpload() {
   movesIn({
-		date: new ISODateString(new Date()).toISOString(),
-		details: buyStore.products.map((p) => ({
+    date: new ISODateString(new Date()).toISOString(),
+    details: buyStore.products.map((p) => ({
         id_product: p.id_product,
-        received_at: typeof p.received_at === 'string' ? p.received_at : p.received_at.toISOString(),
-        expires_at: p.expires_at ? (typeof p.expires_at === 'string' ? p.expires_at : p.expires_at.toISOString()) : null,
+        received_at: p.received_at,
+        expires_at: p.expires_at,
         ammount: p.ammount,
         cost_price: p.cost_price,
       })),
-	})
-	buyStore.products = []
+  })
+  buyStore.products = []
 }
 
 function handleAdd() {
@@ -121,7 +121,7 @@ function handleDelete() {
           :adjust-ammount="product.ammount"
           :checked="selectedIndexes.includes(index)"
           @toggle="toggleProduct(index)"
-					:expireDate="product.expires_at?.toISOString() ?? '-'"
+					:expireDate="product.expires_at ?? '-'"
 					:price="product.cost_price"
         />
       </tbody>

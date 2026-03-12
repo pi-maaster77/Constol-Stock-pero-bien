@@ -73,12 +73,12 @@ export const useMovesStore = defineStore('moves', () => {
         moves.value.push({ id: tempID, ...move } as Move)
       },
       async () => {
-        const res = await movesIn([
+        const res = await movesIn(
           {
-            date: move.date.toISOString(),
+            date: move.date,
             details: move.details as unknown as MoveIn['details'],
           },
-        ])
+        )
         load()
       },
     )
@@ -91,12 +91,12 @@ export const useMovesStore = defineStore('moves', () => {
         moves.value.push({ id: tempID, ...move } as Move)
       },
       async () => {
-        const res = await movesOut([
+        const res = await movesOut(
           {
-            date: move.date.toISOString(),
+            date: move.date,
             details: move.details as unknown as MoveOut['details'],
           },
-        ])
+        )
         load()
       },
     )
@@ -109,12 +109,12 @@ export const useMovesStore = defineStore('moves', () => {
         moves.value.push({ id: tempID, ...move } as Move)
       },
       async () => {
-        const res = await movesAdjust([
+        const res = await movesAdjust(
           {
-            date: move.date.toISOString(),
+            date: move.date,
             details: move.details as unknown as MoveAdjust['details'],
           },
-        ])
+        )
         load()
       },
     )
