@@ -34,6 +34,5 @@ export const movesAdjust = async (movesAdjustData: MoveAdjust[]): Promise<MoveAd
 
 export const getMoves = async (): Promise<(MovesIn | MovesOut | MoveAdjust)[]> => {
   const response = await axios.get(`${apiUrl}${paths.moves}`)
-  console.log('movimientos:', response.data)
   return response.data
 }

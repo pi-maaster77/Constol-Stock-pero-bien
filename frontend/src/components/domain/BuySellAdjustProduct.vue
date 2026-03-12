@@ -146,14 +146,6 @@ function decrement() {
 
 function handleDetail() {
   const expiresAtDate = expirationDate.value ? new ISODateString(expirationDate.value) : null
-  console.log(product.value !== undefined && product.value !== null, {
-    ammount: ammount.value,
-    cost_price: price.value,
-    expires_at: expiresAtDate,
-    id_product: product.value?.id ?? 0,
-    product: product.value,
-    received_at: new ISODateString(new Date()),
-  })
   if (product.value !== undefined && product.value !== null) {
     store.create({
       ammount: ammount.value,

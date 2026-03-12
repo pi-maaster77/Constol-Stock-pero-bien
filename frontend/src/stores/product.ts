@@ -49,7 +49,6 @@ export const useProductsStore = defineStore('products', () => {
       () => {},
       async () => {
         const res = await getProducts()
-        console.log(res)
         products.value.splice(0, products.value.length, ...res)
       },
     )

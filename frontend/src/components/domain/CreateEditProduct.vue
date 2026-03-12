@@ -129,7 +129,6 @@ let modal: Modal
 onMounted(() => {
   unitsStore.load()
   units.value = unitsStore.units
-  console.log('units', units.value)
   const el = document.getElementById('createEditProductModal')
   modal = new Modal(el!)
 })
@@ -143,14 +142,6 @@ function openModal() {
 }
 
 function save() {
-  console.log({
-    barcode: barcode.value.toString(),
-    name: productName.value,
-    unit_id: productUnit.value,
-    price_formula: priceFormula.value,
-    public_price: price.value,
-    expires: expires.value,
-  })
   productStore.updateByID(props.product!.id, {
     bc: barcode.value.toString(),
     name: productName.value,
@@ -166,14 +157,6 @@ function save() {
 }
 
 function create() {
-  console.log({
-    barcode: barcode.value.toString(),
-    name: productName.value,
-    unit_id: productUnit.value,
-    price_formula: priceFormula.value,
-    public_price: price.value,
-    expires: expires.value,
-  })
   productStore.create({
     bc: barcode.value.toString(),
     name: productName.value,

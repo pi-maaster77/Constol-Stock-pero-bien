@@ -65,7 +65,6 @@ const emit = defineEmits<{
 }>()
 
 function toggleAll(event: Event) {
-  console.log('toggling all')
   if (allSelected.value) {
     selectedIds.value = []
   } else {
@@ -74,7 +73,6 @@ function toggleAll(event: Event) {
 }
 
 function toggleProduct(id: number) {
-  console.log('toggling product', id)
   if (selectedIds.value.includes(id)) {
     selectedIds.value = selectedIds.value.filter((p) => p !== id)
   } else {
@@ -94,7 +92,6 @@ function handleEdit() {
 }
 function handleDelete() {
   for (const id of selectedIds.value) {
-    console.log('deleting product', id)
     productStore.deleteByID(id)
   }
 }

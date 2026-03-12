@@ -38,7 +38,6 @@ const emit = defineEmits<{
 }>()
 
 function toggle() {
-  console.log('toggled', props.product.id)
   emit('toggle', props.product.id)
 }
 </script>

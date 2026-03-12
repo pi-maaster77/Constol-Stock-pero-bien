@@ -15,7 +15,6 @@ const modalRef = ref()
 const currentProduct = ref<Product | null>(null)
 
 function handleAdd() {
-  console.log('add')
   currentProduct.value = null
   modalRef.value?.openModal()
 }
@@ -26,8 +25,5 @@ function handleEdit(product: Product[]) {
   }
   currentProduct.value = product[0] ?? null // solo se edita el primero, aunque se puedan seleccionar varios
   modalRef.value.openModal()
-}
-function handleDelete(value: Product[]) {
-  console.log('delete', value)
 }
 </script>

@@ -33,7 +33,6 @@ export const getProductByBC = async (bc: string): Promise<ProductReturn> => {
 
 export const createProduct = async (product: ProductCreate): Promise<ProductReturn> => {
   const response = await axios.post(`${apiUrl}${paths.products}`, product)
-  console.log(response.data)
   return response.data
 }
 

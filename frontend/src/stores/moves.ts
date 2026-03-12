@@ -53,9 +53,7 @@ export const useMovesStore = defineStore('moves', () => {
       () => {},
       async () => {
         const res = await getMoves()
-        console.log('movimientos obtenidos:', res)
         moves.value.splice(0, moves.value.length, ...(res as Move[]))
-        console.log('movimientos en store:', moves.value)
       },
     )
   }
@@ -81,7 +79,6 @@ export const useMovesStore = defineStore('moves', () => {
             details: move.details as unknown as MoveIn['details'],
           },
         ])
-        console.log(res)
         load()
       },
     )
@@ -100,7 +97,6 @@ export const useMovesStore = defineStore('moves', () => {
             details: move.details as unknown as MoveOut['details'],
           },
         ])
-        console.log(res)
         load()
       },
     )
@@ -119,7 +115,6 @@ export const useMovesStore = defineStore('moves', () => {
             details: move.details as unknown as MoveAdjust['details'],
           },
         ])
-        console.log(res)
         load()
       },
     )
