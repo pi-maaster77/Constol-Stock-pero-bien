@@ -6,11 +6,11 @@ from app.models.product.batch.batch import Batch
 from app.models.product.move.moveDetail import MoveDetail
 from app.models.product.product import Product
 from sqlalchemy.orm import selectinload
+from app.schemas.product.move import move as schemas
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
     from app.services.inventory import InventoryService
-    from app.schemas.product.move import move as schemas
 
 # TODO: Cambiar los ValueError por una excepcion personalizada
 
