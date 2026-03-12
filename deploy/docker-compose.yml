@@ -21,7 +21,7 @@ services:
     container_name: apicde
     environment:
       DATABASE_URL: postgresql://cde:cde@postgres:5432/cde
-      CLIENT_URL: http://cde.lan
+      CLIENT_URL: https://cde.lan
     depends_on:
       postgres:
         condition: service_healthy  # <--- ESTO es lo que le obliga a hacer caso
