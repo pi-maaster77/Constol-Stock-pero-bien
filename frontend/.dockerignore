@@ -1,0 +1,32 @@
+# Dependencias (se instalarán dentro del contenedor)
+node_modules
+.npm
+npm-debug.log
+
+# Salida de construcción
+dist
+dev-dist
+
+# Entornos y secretos
+.env
+.env.local
+.env.*.local
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Git
+.git
+.gitignore
+
+# Tests y herramientas
+e2e/
+tests/
+playwright-report/
+test-results/
+.vscode/
+.idea/
+
+# Documentación
+README.md

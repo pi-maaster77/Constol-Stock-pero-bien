@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+.pytest_cache/
+.vscode/
+requirements-dev.txt
+
+# Bases de datos locales (importante para que no pesen en la imagen)
+*.db
+output.sql
+
+# Docker
+Dockerfile
+.dockerignore

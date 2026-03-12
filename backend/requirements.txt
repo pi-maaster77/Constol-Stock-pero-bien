@@ -2,10 +2,4 @@ fastapi
 uvicorn
 dotenv
 sqlalchemy
-
-# DEV DEPENDENCIES
-pytest 
-pytest-asyncio
-pytest-env 
-httpx
-dotenv
+psycopg2-binary
