@@ -9,9 +9,10 @@
 import BuySellAdjustProduct from '@/components/domain/BuySellAdjustProduct.vue'
 import TableBuy from '@/components/domain/TableBuy.vue'
 import { useAuditStore } from '@/stores/audit'
+import { useBuyStore } from '@/stores/buy'
 import { ref } from 'vue'
 
-const auditStore = useAuditStore()
+const buyStore = useBuyStore()
 const modalRef = ref()
 const moveDetail = ref<any>(null)
 
@@ -23,7 +24,7 @@ function handleAdd() {
 function handleEdit(selectedIndexes: number[]) {
   const firstIndex = selectedIndexes[0]
   if (firstIndex === undefined) return
-  moveDetail.value = auditStore.products[firstIndex]
+  moveDetail.value = buyStore.products[firstIndex]
   modalRef.value?.openModal()
 }
 </script>

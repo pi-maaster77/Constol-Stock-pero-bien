@@ -14,6 +14,7 @@ import BuySellAdjustProduct from './components/domain/BuySellAdjustProduct.vue'
 import TableAudit from './components/domain/TableAudit.vue'
 import AuditView from './views/AuditView.vue'
 import BuyView from './views/BuyView.vue'
+import SellView from './views/SellView.vue'
 const activeTab = ref('Productos')
 </script>
 
@@ -94,7 +95,7 @@ const activeTab = ref('Productos')
         <BuyView />
       </div>
       <div v-if="activeTab === 'sell'">
-        <AuditView />
+        <SellView />
       </div>
       <div v-if="activeTab === 'audit'">
         <AuditView />
