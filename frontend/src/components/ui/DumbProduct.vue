@@ -20,14 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import type { ISODateString } from '@/types/ISODatingFormat'
 import type { Product } from '@/types/product'
 const props = defineProps<{
   product: Product
   productIndex?: number
   checked?: boolean
   adjustAmmount?: number
-  expireDate?: ISODateString
+  expireDate?: string
 	price?: number
 }>()
 
