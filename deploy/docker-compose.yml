@@ -23,9 +23,9 @@ services:
     container_name: apicde
     environment:
       DATABASE_URL: postgresql://cde:cde@postgres:5432/cde
-      CLIENT_URL: https://cde.xyz
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy  # <--- ESTO es lo que le obliga a hacer caso
     networks:
       - cde
 
@@ -47,7 +47,11 @@ services:
       - postgres_data:/var/lib/postgresql/18/main
     networks:
       - cde
-    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cde -d cde"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
   
   pihole:
     container_name: pihole
