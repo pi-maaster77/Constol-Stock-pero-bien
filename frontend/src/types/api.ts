@@ -353,7 +353,7 @@ export interface components {
        * Date
        * Format: date
        */
-      date: ISODateString
+      date: string
       /** Details */
       details: components['schemas']['BatchCreate'][]
     }
@@ -363,7 +363,7 @@ export interface components {
        * Date
        * Format: date
        */
-      date: ISODateString
+      date: string
       /** Details */
       details: components['schemas']['BatchCreate'][]
     }
@@ -373,7 +373,7 @@ export interface components {
        * Date
        * Format: date
        */
-      date: ISODateString
+      date: string
       /** Details */
       details: components['schemas']['ProductSelling'][]
     }
