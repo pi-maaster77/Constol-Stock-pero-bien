@@ -24,14 +24,14 @@ app = FastAPI(
     root_path="/api"
 )
 
-client = env.get("CLIENT_URL") or "http://localhost:5173"
+CLIENT = env.get("CLIENT_URL") or "http://localhost:5173"
 
-if client is None:
+if CLIENT is None:
     print("CLIENT_URL no está definido, se usará http://localhost:5173")
     raise TypeError("La URL del cliente es nula")
 
 origins = [
-    client
+    CLIENT
 ]
 
 app.add_middleware(

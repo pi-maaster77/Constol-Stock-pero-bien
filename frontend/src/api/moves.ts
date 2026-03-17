@@ -11,10 +11,10 @@ type MovesIn = components['schemas']['MovesIn']
 type MovesOut = components['schemas']['MovesOut']
 
 const paths = {
-  movesIn: '/moves/in',
-  movesOut: '/moves/out',
-  movesAdjust: '/moves/adjust',
-  moves: '/moves',
+  movesIn: '/moves/in/',
+  movesOut: '/moves/out/',
+  movesAdjust: '/moves/adjust/',
+  moves: '/moves/',
 }
 
 export const movesIn = async (movesInData: MovesIn): Promise<MovesIn> => {
