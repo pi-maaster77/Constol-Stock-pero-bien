@@ -1,8 +1,9 @@
 // frontend/src/api/product.ts
 
-import type { components } from '@/types/api'
+import type { components, paths } from '@/types/api'
 import axios from 'axios'
 import config from './config.json'
+type Path = keyof paths
 
 const { apiUrl } = config
 
@@ -12,8 +13,8 @@ type ProductUpdate = components['schemas']['ProductPatch']
 
 const paths = {
   products: '/product/',
-  productByID: (id: number) => `/product/${id}`,
-  productByBC: (bc: string) => `/product/bc/${bc}`,
+  productByID: (id: number) => `/product/${id}` as Path,
+  productByBC: (bc: string) => `/product/bc/${bc}` as Path,
 }
 
 export const getProducts = async (): Promise<ProductReturn[]> => {

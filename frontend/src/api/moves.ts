@@ -1,20 +1,20 @@
 // frontend/src/api/moves.ts
 
-import type { components } from '@/types/api'
+import type { components, paths } from '@/types/api'
 import axios from 'axios'
 import config from './config.json'
 import type { MoveAdjust } from '@/types/move'
-
+type Path = keyof paths
 const { apiUrl } = config
 
 type MovesIn = components['schemas']['MovesIn']
 type MovesOut = components['schemas']['MovesOut']
 
 const paths = {
-  movesIn: '/moves/in/',
-  movesOut: '/moves/out/',
-  movesAdjust: '/moves/adjust/',
-  moves: '/moves/',
+  movesIn: '/moves/in/' as Path,
+  movesOut: '/moves/out/' as Path,
+  movesAdjust: '/moves/adjust/' as Path,
+  moves: '/moves/' as Path,
 }
 
 export const movesIn = async (movesInData: MovesIn): Promise<MovesIn> => {

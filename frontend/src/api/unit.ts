@@ -1,16 +1,17 @@
 // frontend/src/api/unit.ts
 
-import type { components } from '@/types/api'
+import type { components, paths } from '@/types/api'
 import axios from 'axios'
 import config from './config.json'
+type Path = keyof paths
 
 import type { Unit, UnitCreate, UnitUpdate } from '@/types/unit'
 
 const { apiUrl } = config
 
 const paths = {
-  units: '/unit/',
-  unitByID: (id: number) => `/unit/${id}`,
+  units: '/unit/' as Path,
+  unitByID: (id: number) => `/unit/${id}` as Path,
 }
 
 export const getUnit = async (): Promise<Unit[]> => {

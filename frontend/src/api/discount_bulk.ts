@@ -1,8 +1,9 @@
 // frontend/src/api/discount_bulk.ts
 
-import type { components } from '@/types/api'
+import type { components, paths } from '@/types/api'
 import axios from 'axios'
 import config from './config.json'
+type Path = keyof paths
 
 const { apiUrl } = config
 
@@ -11,8 +12,8 @@ type DiscountCreate = components['schemas']['DiscountBulkCreate']
 type DiscountUpdate = components['schemas']['DiscountBulkUpdate']
 
 const paths = {
-  discount: '/discount_bulk/',
-  discountByID: (id: number) => `/discount_bulk/${id}`,
+  discount: '/discount_bulk/' as Path,
+  discountByID: (id: number) => `/discount_bulk/${id}` as Path,
 }
 
 export const getDiscount = async (): Promise<DiscountReturn[]> => {
