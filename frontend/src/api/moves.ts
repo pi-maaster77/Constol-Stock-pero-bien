@@ -11,9 +11,9 @@ type MovesIn = components['schemas']['MovesIn']
 type MovesOut = components['schemas']['MovesOut']
 
 const paths = {
-  movesIn: '/moves/in/' as Path,
-  movesOut: '/moves/out/' as Path,
-  movesAdjust: '/moves/adjust/' as Path,
+  movesIn: '/moves/in' as Path,
+  movesOut: '/moves/out' as Path,
+  movesAdjust: '/moves/adjust' as Path,
   moves: '/moves/' as Path,
 }
 
