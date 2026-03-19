@@ -6,11 +6,16 @@
 import { getProductByBC } from '@/api/product'
 import { useDiscountsStore } from '@/stores/discount'
 import type { Product } from '@/types/product'
+import type { Discount } from '@/types/discounts'
 import { Modal } from 'bootstrap'
 import { computed, onMounted, ref, watch } from 'vue'
 import NumberInputWithButtons from '../ui/Inputs/NumberInputWithButtons.vue'
 import TextInput from '../ui/Inputs/TextInput.vue'
 import NumberInput from '../ui/Inputs/NumberInput.vue'
+
+const props = defineProps<{
+	discount?:  Discount
+}>()
 
 const discountStore = useDiscountsStore()
 
@@ -28,7 +33,7 @@ const ammountBridge = computed({
     ammount.value = parseFloat(val) || 0
   },
 })
-
+const discountPercent = ref(0)
 
 watch(barcode, async (newVal) => {
   if (!newVal) {
@@ -79,6 +84,30 @@ function decrement(){
 	if(ammount.value > 0 ){
 		ammount.value--
 	}
+}
+
+function handleDetail() {
+  if (product.value !== undefined && product.value !== null) {
+    discountStore.create({
+      min_ammount: ammount.value,
+      id_product: product.value.id,
+			discount: discountPercent.value
+    })
+  }
+  closeModal()
+}
+
+function handleSave() {
+	if(!product.value || !props.discount) return
+	discountStore.updateByID(
+		props.discount.id,
+		{
+			id_product: product.value.id,
+			min_ammount: ammount.value,
+			discount: discountPercent.value
+		}
+	)
+  closeModal()
 }
 
 defineExpose({
@@ -154,7 +183,10 @@ defineExpose({
           >
             <template #label><label class="form-label">Cantidad</label></template>
           </NumberInputWithButtons>
-          
+          <div class="modal-footer">
+						<button type="button" class="btn btn-primary" @click="handleSave" v-if="props.discount">Guardar</button>
+            <button type="button" class="btn btn-primary" @click="handleDetail" v-else>Crear</button>
+          </div>
         </div>
       </div>
     </div>

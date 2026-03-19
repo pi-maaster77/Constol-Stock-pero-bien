@@ -71,7 +71,7 @@ export const useDiscountsStore = defineStore('discounts', () => {
     )
   }
 
-  function update(id: number, value: Omit<Discount, 'id'>) {
+  function updateByID(id: number, value: Omit<Discount, 'id'>) {
     optimistic(
       () => {
         const tempID = Math.max(0, ...discounts.value.map((p) => p.id)) + 1
@@ -102,5 +102,5 @@ export const useDiscountsStore = defineStore('discounts', () => {
     )
   }
 
-  return { discounts, discountsCount, load, getDiscountByID, update, deleteByID }
+  return { discounts, discountsCount, load, getDiscountByID, updateByID, deleteByID, create }
 })
