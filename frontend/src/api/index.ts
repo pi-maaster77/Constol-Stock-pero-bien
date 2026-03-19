@@ -1,8 +1,10 @@
+// frontend/src/api/index.ts
+
 import axios from 'axios'
-import config from './config.json'
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
 const apiClient = axios.create({
-  baseURL: config.apiUrl,
+  baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json',
   },

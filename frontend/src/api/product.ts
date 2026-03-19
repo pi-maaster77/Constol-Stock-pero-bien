@@ -2,10 +2,8 @@
 
 import type { components, paths } from '@/types/api'
 import axios from 'axios'
-import config from './config.json'
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 type Path = keyof paths
-
-const { apiUrl } = config
 
 type ProductReturn = components['schemas']['ProductReturn']
 type ProductCreate = components['schemas']['ProductCreate']

@@ -2,12 +2,10 @@
 
 import type { components, paths } from '@/types/api'
 import axios from 'axios'
-import config from './config.json'
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 type Path = keyof paths
 
 import type { Unit, UnitCreate, UnitUpdate } from '@/types/unit'
-
-const { apiUrl } = config
 
 const paths = {
   units: '/unit/' as Path,

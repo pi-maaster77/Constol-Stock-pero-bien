@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 import ProductsView from './views/ProductsView.vue'
 
-import { ref } from 'vue'
+import { computed, markRaw, ref } from 'vue'
 import TableMoves from './components/domain/TableMoves.vue'
 import MovesView from './views/MovesView.vue'
 import BuySellAdjustProduct from './components/domain/BuySellAdjustProduct.vue'
@@ -15,92 +15,44 @@ import TableAudit from './components/domain/TableAudit.vue'
 import AuditView from './views/AuditView.vue'
 import BuyView from './views/BuyView.vue'
 import SellView from './views/SellView.vue'
-const activeTab = ref('Productos')
+import DiscountsView from './views/DiscountsView.vue'
+const activeTab = ref('products')
+
+// Usamos markRaw para que Vue no intente hacer reactivos los objetos de los componentes (mejora rendimiento)
+const tabs: Record<string, { label: string, icon: string, component: any }> = {
+  products: { label: 'Productos', icon: 'bi-table', component: markRaw(ProductsView) },
+  moves: { label: 'Entradas/Salidas', icon: 'bi-arrow-left-right', component: markRaw(MovesView) },
+  buy: { label: 'Comprar', icon: 'bi-bag', component: markRaw(BuyView) },
+  sell: { label: 'Vender', icon: 'bi-receipt-cutoff', component: markRaw(SellView) },
+  audit: { label: 'Auditar', icon: 'bi-archive', component: markRaw(AuditView) },
+  discount: { label: 'Descuentos', icon: 'bi-percent', component: markRaw(DiscountsView) },
+  tests: { label: 'Pruebas', icon: 'bi-flask', component: null } // O un componente de pruebas
+}
+
+const currentComponent = computed(() => tabs[activeTab.value]?.component)
 </script>
 
 <template>
   <div class="container-fluid mt-3">
     <ul class="nav nav-tabs custom-notebook" role="tablist">
-      <li class="nav-item">
+      <li v-for="(tab, key) in tabs" :key="key" class="nav-item">
         <button
           class="nav-link"
-          :class="{ active: activeTab === 'products' }"
-          @click="activeTab = 'products'"
+          :class="{ active: activeTab === key }"
+          @click="activeTab = key"
           type="button"
         >
-          <i class="bi bi-table me-2"></i>Productos
-        </button>
-      </li>
-      <li class="nav-item">
-        <button
-          class="nav-link"
-          :class="{ active: activeTab === 'moves' }"
-          @click="activeTab = 'moves'"
-          type="button"
-        >
-          <i class="bi bi-arrow-left-right me-2"></i>Entradas/Salidas
-        </button>
-      </li>
-      <li class="nav-item">
-        <button
-          class="nav-link"
-          :class="{ active: activeTab === 'buy' }"
-          @click="activeTab = 'buy'"
-          type="button"
-        >
-          <i class="bi bi-bag me-2"></i>Comprar
-        </button>
-      </li>
-      <li class="nav-item">
-        <button
-          class="nav-link"
-          :class="{ active: activeTab === 'sell' }"
-          @click="activeTab = 'sell'"
-          type="button"
-        >
-          <i class="bi bi-basket me-2"></i>Vender
-        </button>
-      </li>
-      <li class="nav-item">
-        <button
-          class="nav-link"
-          :class="{ active: activeTab === 'audit' }"
-          @click="activeTab = 'audit'"
-          type="button"
-        >
-          <i class="bi bi-archive me-2"></i>Auditar
-        </button>
-      </li>
-      <li class="nav-item">
-        <button
-          class="nav-link"
-          :class="{ active: activeTab === 'tests' }"
-          @click="activeTab = 'tests'"
-          type="button"
-        >
-          <i class="bi bi-flask me-2"></i>Pruebas
+          <i :class="tab.icon" class="me-2"></i>{{ tab.label }}
         </button>
       </li>
     </ul>
 
     <div class="tab-content border-start border-end border-bottom p-4 shadow-sm">
-      <div v-if="activeTab === 'products'" class="tab-pane fade show active">
-        <ProductsView />
+      <component :is="currentComponent" v-if="currentComponent" />
+      
+      <div v-else>
+        <p class="text-muted">Sección {{ activeTab }} en desarrollo...</p>
       </div>
-
-      <div v-if="activeTab === 'moves'" class="tab-pane fade show active">
-        <MovesView />
-      </div>
-      <div v-if="activeTab === 'buy'">
-        <BuyView />
-      </div>
-      <div v-if="activeTab === 'sell'">
-        <SellView />
-      </div>
-      <div v-if="activeTab === 'audit'">
-        <AuditView />
-      </div>
-      <div v-if="activeTab === 'pruebas'"></div>
-		</div>
+    </div>
   </div>
 </template>

@@ -9,6 +9,9 @@ COPY package*.json ./
 # Instalar dependencias
 RUN npm install
 
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 # Copiar el resto del código
 COPY . .
 

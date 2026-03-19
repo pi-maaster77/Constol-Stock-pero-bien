@@ -2,10 +2,9 @@
 
 import type { components, paths } from '@/types/api'
 import axios from 'axios'
-import config from './config.json'
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 import type { MoveAdjust } from '@/types/move'
 type Path = keyof paths
-const { apiUrl } = config
 
 type MovesIn = components['schemas']['MovesIn']
 type MovesOut = components['schemas']['MovesOut']
