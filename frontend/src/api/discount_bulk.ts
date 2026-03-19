@@ -33,7 +33,7 @@ export const updateDiscount = async (
   id: number,
   discount: DiscountUpdate,
 ): Promise<DiscountReturn> => {
-  const response = await axios.patch(`${apiUrl}${paths.discountByID(id)}`, discount)
+  const response = await axios.put(`${apiUrl}${paths.discountByID(id)}`, discount)
   return response.data
 }
 

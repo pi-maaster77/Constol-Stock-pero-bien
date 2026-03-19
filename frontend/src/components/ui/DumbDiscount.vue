@@ -13,7 +13,7 @@
     </td>
     <td>{{ product.bc }}</td>
     <td>{{ product.name }}</td>
-    <td>{{ percent }}</td>
+    <td>{{ percent*100 }}%</td>
     <td>{{ ammount }}</td>
   </tr>
 	<tr v-else>
@@ -36,8 +36,6 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'edit', product: Product): void
-  (e: 'delete', product: Product): void
   (e: 'toggle', id: number): void
 }>()
 

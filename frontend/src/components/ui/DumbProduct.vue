@@ -31,8 +31,6 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'edit', product: Product): void
-  (e: 'delete', product: Product): void
   (e: 'toggle', id: number): void
 }>()
 

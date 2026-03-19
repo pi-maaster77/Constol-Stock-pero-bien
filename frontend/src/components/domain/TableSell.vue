@@ -110,6 +110,13 @@ function handleDelete() {
           </th>
           <th v-for="header in productAtributes" :key="header">{{ header }}</th>
         </tr>
+					<tr>
+						<th>-</th>
+						<th>-</th>
+						<th>Total:</th>
+						<th>{{ sellStore.products.reduce((acum:number, product) => acum + product.cost_price, 0)}}</th>
+						<th>-</th>
+				</tr>
       </thead>
       <tbody>
         <DumbProduct

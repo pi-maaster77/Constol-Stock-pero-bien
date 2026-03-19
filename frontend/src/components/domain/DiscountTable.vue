@@ -14,22 +14,26 @@ import ButtonDelete from '../ui/Buttons/ButtonDelete.vue';
 const discountStore = useDiscountsStore()
 const productStore = useProductsStore()
 const productAtributes = [
-	"Codigo de barras", "Nombre", "Cantidad Minima", "Descuento"
+	"Codigo de barras", "Nombre", "Descuento", "Cantidad Minima"
 ]
 
 const selectedIds = ref<number[]>([])
 const allSelected = computed(  
 	() => discountStore.discountsCount > 0 && selectedIds.value.length === discountStore.discountsCount,
 )
-const disabled = computed(()=> selectedIds.value.length === 0)
+const disabled = computed(() => selectedIds.value.length === 0)
 
 const emit = defineEmits<{
   (e: 'add'): void
   (e: 'edit', selectedIds: number[]): void
 }>()
 
-function toggleAll(){
-	selectedIds.value = discountStore.discounts.map(d => d.id)
+function toggleAll() {
+  if (allSelected.value) {
+    selectedIds.value = []
+  } else {
+    selectedIds.value = discountStore.discounts.map(d => d.id)
+  }
 }
 
 function handleUpdate(){
@@ -46,6 +50,14 @@ function handleDelete(){
 		discountStore.deleteByID(discount)
 	}
 }
+function handleSelect(id: number) {
+  const index = selectedIds.value.indexOf(id)
+  if (index === -1) {
+    selectedIds.value.push(id)
+  } else {
+    selectedIds.value.splice(index, 1)
+  }
+}
 
 onMounted(
 	()=>discountStore.load()
@@ -54,7 +66,7 @@ onMounted(
 
 <template>
 	<div class="container mt-4">
-    <h3 class="mb-3">Lista de productos</h3>
+    <h3 class="mb-3">Lista de descuentos</h3>
     <div class="mb-3 btn-group" role="group">
       <ButtonUpdate @click="handleUpdate" />
       <ButtonAdd @click="handleAdd" />
@@ -88,7 +100,8 @@ onMounted(
 					:ammount="discount.min_ammount"
 					:id="discount.id"
 					:percent="discount.discount"
-					:checked="discount.id in selectedIds"
+					:checked="selectedIds.includes(discount.id)"
+					@toggle="handleSelect(discount.id)"
 					v-for="discount in discountStore.discounts"
 				
 				/>

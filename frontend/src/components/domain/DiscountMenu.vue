@@ -12,12 +12,15 @@ import { computed, onMounted, ref, watch } from 'vue'
 import NumberInputWithButtons from '../ui/Inputs/NumberInputWithButtons.vue'
 import TextInput from '../ui/Inputs/TextInput.vue'
 import NumberInput from '../ui/Inputs/NumberInput.vue'
+import PercentInput from '../ui/Inputs/PercentInput.vue'
+import { useProductsStore } from '@/stores/product'
 
 const props = defineProps<{
 	discount?:  Discount
 }>()
 
 const discountStore = useDiscountsStore()
+const productStore = useProductsStore()
 
 const barcode = ref<string>('')
 const product = ref<Product | null>(null)
@@ -34,7 +37,12 @@ const ammountBridge = computed({
   },
 })
 const discountPercent = ref(0)
-
+const discountPercentBridge = computed({
+  get: () => discountPercent.value.toString(),
+  set: (val) => {
+    discountPercent.value = parseFloat(val) || 0
+  },
+})
 watch(barcode, async (newVal) => {
   if (!newVal) {
     product.value = null
@@ -60,6 +68,20 @@ watch(barcode, async (newVal) => {
     isLoading.value = false
   }
 })
+
+watch(
+  () => props.discount,
+  (d) => {
+    if (!d) return
+		const tempProduct = productStore.getProductByID(d.id_product)
+		if (!tempProduct) return
+    product.value = tempProduct
+		barcode.value = tempProduct.bc
+    ammount.value = d.min_ammount
+		discountPercent.value = d.discount*100 
+	},
+  { immediate: true },
+)
 
 let modal: Modal
 
@@ -91,7 +113,7 @@ function handleDetail() {
     discountStore.create({
       min_ammount: ammount.value,
       id_product: product.value.id,
-			discount: discountPercent.value
+			discount: discountPercent.value/100
     })
   }
   closeModal()
@@ -104,7 +126,7 @@ function handleSave() {
 		{
 			id_product: product.value.id,
 			min_ammount: ammount.value,
-			discount: discountPercent.value
+			discount: discountPercent.value/100
 		}
 	)
   closeModal()
@@ -128,7 +150,7 @@ defineExpose({
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">
-						
+						<span v-if="discount">Editar</span><span v-else>Crear</span> Descuento
           </h1>
 
           <button
@@ -149,6 +171,7 @@ defineExpose({
               'is-loading': isLoading,
               'mb-3': true,
             }"
+						:disabled="props.discount !== null"
           >
             <template #label><label class="form-label">Código de barras</label></template>
           </NumberInput>
@@ -183,6 +206,12 @@ defineExpose({
           >
             <template #label><label class="form-label">Cantidad</label></template>
           </NumberInputWithButtons>
+					<PercentInput
+						v-model="discountPercentBridge"
+						:class="{ 'mb-3': true }"
+					>
+						<template #label><label class="form-label">Descuento</label></template>
+					</PercentInput>
           <div class="modal-footer">
 						<button type="button" class="btn btn-primary" @click="handleSave" v-if="props.discount">Guardar</button>
             <button type="button" class="btn btn-primary" @click="handleDetail" v-else>Crear</button>

@@ -9,6 +9,7 @@
       :type="props.mode === 'barcode' ? 'text' : 'number'"
       :value="modelValue"
       :step="mode === 'float' ? 'any' : 1"
+			:disabled="disabled"
       @input="handleInput"
       @blur="handleBlur"
       class="form-control"
@@ -19,6 +20,7 @@
     :type="props.mode === 'barcode' ? 'text' : 'number'"
     :value="modelValue"
     :step="mode === 'float' ? 'any' : 1"
+		:disabled="disabled"
     @input="handleInput"
     @blur="handleBlur"
     class="form-control"
@@ -31,6 +33,7 @@ const props = withDefaults(
     // Aceptamos ambos tipos para que no de error en CreateEditProduct
     modelValue: string | number | null
     mode?: 'int' | 'float' | 'barcode'
+		disabled?: boolean
   }>(),
   {
     mode: 'int',

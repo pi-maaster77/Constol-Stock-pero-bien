@@ -1,8 +1,8 @@
 <!-- frontend/src/views/DiscountsView.vue -->
 
 <template>
-	<DiscountTable @add="handleAdd" @edit="handleAdd"/>
-	<DiscountMenu ref="modalRef" :move-detail="discountDetail"/>
+  <DiscountTable @add="handleAdd" @edit="handleEdit"/>
+  <DiscountMenu ref="modalRef" :discount="discountDetail"/>
 </template>
 <script setup lang="ts">
 import DiscountMenu from '@/components/domain/DiscountMenu.vue';
@@ -19,11 +19,17 @@ function handleAdd() {
   modalRef.value?.openModal()
 }
 
-function handleEdit(selectedIndexes: number[]) {
-  const firstIndex = selectedIndexes[0]
-  if (firstIndex === undefined) return
-  discountDetail.value = discountStore.discounts[firstIndex]
-  modalRef.value?.openModal()
+function handleEdit(selectedIds: number[]) {
+  const firstId = selectedIds[0]
+  if (firstId === undefined) return
+  
+  // Buscamos el objeto real por su ID único
+  const discountToEdit = discountStore.discounts.find(d => d.id === firstId)
+  
+  if (discountToEdit) {
+    discountDetail.value = discountToEdit
+    modalRef.value?.openModal()
+  }
 }
 
 </script>
