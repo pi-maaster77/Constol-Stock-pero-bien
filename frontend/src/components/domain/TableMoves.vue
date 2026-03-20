@@ -25,7 +25,8 @@ const isLoading = ref(false)
 </script>
 
 <template>
-  <div class="container mt-4">
+  <div 
+		class="container mt-4">
     <h3 class="mb-3">Historial de Movimientos</h3>
     <div class="mb-3 btn-group" role="group">
       <ButtonUpdate @click="movesStore.load" :disabled="isLoading" />
